@@ -1,10 +1,8 @@
 package contas;
 
-import exceptions.NegativeValueException;
-import exceptions.TaPobreException;
-import exceptions.TransferenciaRecursivaException;
+import exceptions.*;
 
-public class ContaCorrente extends Conta implements Transferencia_Saque {
+public class ContaPoupanca extends Conta implements Transferencia_Saque {
 	
 	@Override
 	public boolean sacar(double valor) throws TaPobreException, NegativeValueException {	
@@ -42,6 +40,18 @@ public class ContaCorrente extends Conta implements Transferencia_Saque {
 			throw new NegativeValueException("Valor negativo é inválido para esta operação!");
 		} else {
 			return false;
+		}
+	}
+	
+	/**
+	 * Apresenta o rendimento mensal da conta, com base no saldo atual
+	 * A taxa de rendimento da poupança no MazeBank é de 0,5% 
+	 */
+	public void rendimento () {
+		if (getSaldo() > 0) {
+			System.out.println("Se seu saldo continuar inalterado, em um mês seu rendimento será de R$" + getSaldo() * 0.005);
+		} else {
+			System.err.println("Não existe saldo nessa conta!");
 		}
 	}
 }

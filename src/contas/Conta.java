@@ -1,12 +1,18 @@
 package contas;
 
-import exceptions.TaPobreException;
+import exceptions.NegativeValueException;
 
+/**
+ * 
+ * @author vitoria
+ *
+ */
 public abstract class Conta {
 	private Cliente titular;
 	private double saldo;
 	private String numAgencia;
 	private String numConta;
+	private String senha;
 	
 	public Conta () {}
 		
@@ -16,30 +22,22 @@ public abstract class Conta {
 	 * @param numAgencia
 	 * @param numConta
 	 */
-	public Conta(Cliente titular, double saldo, String numAgencia, String numConta) {
+	public Conta(Cliente titular, double saldo, String numAgencia, String numConta, String senha) {
 		super();
 		this.titular = titular;
 		this.saldo = saldo;
 		this.numAgencia = numAgencia;
 		this.numConta = numConta;
+		this.senha = senha;
 	}
 	
 	/**
 	 * Ação para realizar deposito, ou seja, somar do saldo o valor a ser depositado 
 	 * @param valor
 	 * @return true caso tenha dado certo o depósito
+	 * @throws NegativeValueException 
 	 */
-	public abstract boolean deposita (double valor);
-	
-	/**
-	 * Ação que realiza transferência de valores entre duas contas, ou seja,
-	 * subtrai o valor de uma e somar o mesmo valor na outra
-	 * @param conta
-	 * @param valor
-	 * @return true caso tenha dado certo a transferência
-	 * @throws TaPobreException
-	 */
-	public abstract boolean transfere (Conta conta, double valor) throws TaPobreException;
+	public abstract boolean deposita (double valor) throws NegativeValueException;
 
 	/**
 	 * @return the saldo
@@ -74,5 +72,12 @@ public abstract class Conta {
 	 */
 	protected String getNumConta() {
 		return numConta;
+	}
+
+	/**
+	 * @return the senha
+	 */
+	public String getSenha() {
+		return senha;
 	}	
 }
