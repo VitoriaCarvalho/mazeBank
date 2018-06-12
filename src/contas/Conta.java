@@ -1,6 +1,9 @@
 package contas;
 
+import java.math.BigDecimal;
+
 import exceptions.NegativeValueException;
+import usuarios.Cliente;
 
 /**
  * 
@@ -9,7 +12,7 @@ import exceptions.NegativeValueException;
  */
 public abstract class Conta {
 	private Cliente titular;
-	private double saldo;
+	private BigDecimal saldo;
 	private String numAgencia;
 	private String numConta;
 	private String senha;
@@ -22,7 +25,7 @@ public abstract class Conta {
 	 * @param numAgencia
 	 * @param numConta
 	 */
-	public Conta(Cliente titular, double saldo, String numAgencia, String numConta, String senha) {
+	public Conta(Cliente titular, BigDecimal saldo, String numAgencia, String numConta, String senha) {
 		super();
 		this.titular = titular;
 		this.saldo = saldo;
@@ -37,19 +40,26 @@ public abstract class Conta {
 	 * @return true caso tenha dado certo o depósito
 	 * @throws NegativeValueException 
 	 */
-	public abstract boolean deposita (double valor) throws NegativeValueException;
+	public boolean deposita(BigDecimal valor) throws NegativeValueException {
+		if (valor.compareTo(new BigDecimal("0")) > 0) {			
+			this.setSaldo(this.getSaldo().add(valor));
+			return true;
+		} else {
+			throw new NegativeValueException("Valor negativo é inválido para esta operação!");
+		}
+	}
 
 	/**
 	 * @return the saldo
 	 */
-	protected double getSaldo() {
+	protected BigDecimal getSaldo() {
 		return saldo;
 	}
 
 	/**
 	 * @param saldo the saldo to set
 	 */
-	protected void setSaldo(double saldo) {
+	protected void setSaldo(BigDecimal saldo) {
 		this.saldo = saldo;
 	}
 

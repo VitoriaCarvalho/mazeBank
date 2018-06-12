@@ -1,31 +1,24 @@
 package contas;
 
-import exceptions.NegativeValueException;
+import java.math.BigDecimal;
+
 import exceptions.TaPobreException;
 
+/**
+ * Nesta classe o método de depósito pode ser utilizado apenas pelo gerente, intermediando o empregador.
+ * @author vitoria and Jederson 
+ */
 public class ContaSalario extends Conta{
 	private ContaCorrente contaAnexada;
-
-	/**
-	 * Nesta classe esta operação pode apenas ser utilizada pelo gerente intermediando o empregador 
-	 */
-	@Override
-	public boolean deposita(double valor) throws NegativeValueException {
-		if (valor > 0) {			
-			this.setSaldo(this.getSaldo() + valor);
-			return true;
-		} else {
-			throw new NegativeValueException("Valor negativo é inválido para esta operação!");
-		}
-	}
 	
 	/**
 	 * A ação transferência em conta salário é restrita apenas à conta corrente de mesmo titular e deve ser transferido o valor completo da conta
+	 * @return true caso a operação seja bem sucedida
 	 */
 	public boolean transfere() throws TaPobreException {
-		if (getSaldo() > 0) {
-			contaAnexada.setSaldo(contaAnexada.getSaldo() + this.getSaldo());
-			this.setSaldo(0);
+		if (getSaldo().compareTo(new BigDecimal("0")) > 0) {
+			contaAnexada.setSaldo(contaAnexada.getSaldo().add(getSaldo()));
+			this.setSaldo(new BigDecimal("0"));
 			return true;
 		} else {
 			throw new TaPobreException("Não há saldo disponível nessa conta!");

@@ -1,5 +1,7 @@
 package contas;
 
+import java.math.BigDecimal;
+
 import exceptions.NegativeValueException;
 import exceptions.TaPobreException;
 import exceptions.TransferenciaRecursivaException;
@@ -12,7 +14,7 @@ public interface Transferencia_Saque {
 	 * @throws TaPobreException
 	 * @throws NegativeValueException
 	 */
-	public boolean sacar (double valor) throws TaPobreException, NegativeValueException;
+	public boolean sacar (BigDecimal valor) throws TaPobreException, NegativeValueException;
 	
 	/**
 	 * Ação que realiza transferência de valores entre duas contas, ou seja,
@@ -23,5 +25,5 @@ public interface Transferencia_Saque {
 	 * @throws TaPobreException
 	 * @throws NegativeValueException 
 	 */
-	public abstract boolean transfere (Conta conta, double valor) throws TaPobreException, NegativeValueException, TransferenciaRecursivaException;
+	public abstract boolean transfere (Conta conta, BigDecimal valor) throws TaPobreException, NegativeValueException, TransferenciaRecursivaException;
 }
