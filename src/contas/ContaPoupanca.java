@@ -2,6 +2,8 @@ package contas;
 
 import java.math.BigDecimal;
 
+import banco.Banco;
+import banco.Cambio;
 import exceptions.*;
 
 public class ContaPoupanca extends Conta implements Transferencia_Saque {
@@ -46,4 +48,78 @@ public class ContaPoupanca extends Conta implements Transferencia_Saque {
 			System.err.println("Não existe saldo nessa conta!");
 		}
 	}
+	
+	@Override
+	public void menu() {
+		int opcao;
+		BigDecimal valor;
+		
+		do {			
+			try {
+				System.out.println("+-----------------------------+");
+				System.out.println("|        Conta Poupança       |");
+				System.out.println("+-----------------------------+");
+				System.out.println("| 1 - Depositar               |");
+				System.out.println("| 2 - Sacar                   |");
+				System.out.println("| 3 - Transferir              |");
+				System.out.println("| 4 - Ver Saldo               |");
+				System.out.println("| 5 - Verificar rendimento    |");
+				System.out.println("| 0 - Sair                    |");
+				System.out.println("+-----------------------------+");
+				opcao = EntradasErroneas.inputInt();
+				
+				switch (opcao) {
+				case 1:
+					System.out.println("Informe o valor a se depositar: ");
+					valor = new BigDecimal(EntradasErroneas.inputBigDecimal());
+					valor = Cambio.converteParaReal(valor);
+					System.out.println("Valor convertido para real.");
+					this.deposita(valor);
+					break;
+				case 2:
+					System.out.println("Informe o valor do saque: ");
+					valor = new BigDecimal(EntradasErroneas.inputBigDecimal());
+					System.out.println("R$ " + valor + " convertido para " + Cambio.converteDeReal(valor));
+					this.sacar(valor);
+					break;
+				case 3:
+					System.out.println("Informe o número da conta destino: ");
+					String num = EntradasErroneas.scanner.next().toString();
+					System.out.println("Informe o número da agencia: ");
+					String ag = EntradasErroneas.scanner.next().toString();
+					
+					for (Conta contas : Banco.contas) {
+						if (contas.getNumConta().equals(num) && contas.getNumAgencia().equals(ag)) {
+							if (contas instanceof ContaCorrente || contas instanceof ContaPoupanca) {
+								System.out.println("Informe o valor a ser trasnferido: ");
+								valor = new BigDecimal(EntradasErroneas.inputBigDecimal());
+								this.transfere(contas, valor);
+								break;
+							} else {							
+								System.err.println("Desculpe, conta salário não pode receber transferência!");
+							}
+						}
+					}
+					break;
+				case 4:
+					System.out.println("\nConsulta de saldo:\n");
+					System.out.println(this.toString());
+					break;
+				case 5:
+					System.out.println("\nVerificar rendimento:\n");
+					rendimento();
+					break;
+				case 0:
+					break;
+				default:
+					System.err.println("Opção incorreta. Tente novamente!");
+					break;
+				}	
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+			}
+		} while (true);
+	}
+	
+	
 }

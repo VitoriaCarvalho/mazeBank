@@ -3,6 +3,7 @@ package banco;
 import java.util.ArrayList;
 import contas.*;
 import exceptions.EntradasErroneas;
+import gerencia.MenuGerente;
 import usuarios.Gerente;
 import usuarios.Usuario;
 

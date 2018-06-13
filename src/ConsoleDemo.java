@@ -1,4 +1,5 @@
 import java.io.Console;
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -65,7 +66,7 @@ public class ConsoleDemo {
 		   }
 	   } while (true);*/
 	   
-	   do {
+	   /*do {
 		   try {
 			   System.out.println("Informe o CPF: ");
 			   Long cpf = EntradasErroneas.scanner.nextLong();
@@ -125,5 +126,9 @@ public class ConsoleDemo {
 	   }
 	   if (cont == c.length) return true;
 	   return false;
+   }*/
+	   BigDecimal valor = new BigDecimal("4.5");
+	   
+	   System.out.println(valor.toString());
    }
 }

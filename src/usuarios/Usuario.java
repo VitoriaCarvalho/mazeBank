@@ -3,9 +3,21 @@ package usuarios;
 import java.util.Date;
 
 public class Usuario {
-	private String nome;
-	private int cpf;
-	private int rg;
+	private String nome, cpf, rg, telefone, dataNasc;
+	/**
+	 * @return the dataNasc
+	 */
+	public String getDataNasc() {
+		return dataNasc;
+	}
+
+	/**
+	 * @param dataNasc the dataNasc to set
+	 */
+	public void setDataNasc(String dataNasc) {
+		this.dataNasc = dataNasc;
+	}
+
 	private Endereco endereco;
 
 	public Usuario () {}
@@ -15,13 +27,17 @@ public class Usuario {
 	 * @param cpf
 	 * @param rg
 	 * @param endereco
+	 * @param telefone
+	 * @param dataNasc
 	 */
-	public Usuario(String nome, int cpf, int rg, Endereco endereco) {
+	public Usuario(String nome, String cpf, String rg, String telefone, String dataNasc, Endereco endereco) {
 		super();
 		this.nome = nome;
 		this.cpf = cpf;
 		this.rg = rg;
 		this.endereco = endereco;
+		this.telefone = telefone;
+		this.dataNasc = dataNasc;
 	}
 
 	/* (non-Javadoc)
@@ -34,11 +50,13 @@ public class Usuario {
 		sb.append("Nome: " + nome + "\n");
 		sb.append("CPF: " + cpf + "\n");
 		sb.append("RG: " + rg + "\n");
+		sb.append("Data de nascimento: " + dataNasc + "\n");
 		sb.append("Rua: " + endereco.rua + "\n");
 		sb.append("Bairro: " + endereco.bairro + "\n");
 		sb.append("Número: " + endereco.numero + "\n");
 		sb.append("Cidade: " + endereco.cidade + "\n");
 		sb.append("UF: " + endereco.uf + "\n");
+		sb.append("Telefone: " + telefone);
 		sb.append("\n+------------------------------------------------------+\n");
 		return sb.toString();
 	}
@@ -60,28 +78,28 @@ public class Usuario {
 	/**
 	 * @return the cpf
 	 */
-	public int getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 	
 	/**
 	 * @param cpf the cpf to set
 	 */
-	public void setCpf(int cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 	
 	/**
 	 * @return the rg
 	 */
-	public int getRg() {
+	public String getRg() {
 		return rg;
 	}
 	
 	/**
 	 * @param rg the rg to set
 	 */
-	public void setRg(int rg) {
+	public void setRg(String rg) {
 		this.rg = rg;
 	}
 	
@@ -97,5 +115,19 @@ public class Usuario {
 	 */
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+	
+	/**
+	 * @return the telefone
+	 */
+	public String getTelefone() {
+		return telefone;
+	}
+
+	/**
+	 * @param telefone the telefone to set
+	 */
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 }

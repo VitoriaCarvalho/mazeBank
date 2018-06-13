@@ -2,6 +2,7 @@ package contas;
 
 import java.math.BigDecimal;
 
+import exceptions.EntradasErroneas;
 import exceptions.TaPobreException;
 
 /**
@@ -30,5 +31,41 @@ public class ContaSalario extends Conta {
 	 */
 	public ContaCorrente getContaAnexada() {
 		return contaAnexada;
+	}
+	
+	@Override
+	public void menu() {
+		int opcao;
+		
+		do {			
+			try {
+				System.out.println("+-----------------------------+");
+				System.out.println("|        Conta Salário        |");
+				System.out.println("+-----------------------------+");
+				System.out.println("| 1 - Transferir              |");
+				System.out.println("| 2 - Ver Saldo               |");
+				System.out.println("| 0 - Sair                    |");
+				System.out.println("+-----------------------------+");
+				opcao = EntradasErroneas.inputInt();
+				
+				switch (opcao) {
+				case 1:
+					System.out.println("\nTransferência para a conta corrente anexada:\n");
+					this.transfere();
+					break;
+				case 2:
+					System.out.println("\nConsulta de saldo:\n");
+					System.out.println(this.toString());
+					break;
+				case 0:
+					break;
+				default:
+					System.err.println("Opção incorreta. Tente novamente!");
+					break;
+				}	
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+			}
+		} while (true);
 	}
 }

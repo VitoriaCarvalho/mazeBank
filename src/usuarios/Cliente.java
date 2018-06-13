@@ -8,7 +8,7 @@ import java.util.Date;
  *
  */
 public class Cliente extends Usuario {
-	private Date dataEntrada;
+	private String dataEntrada;
 	
 	public Cliente () {}
 
@@ -17,26 +17,31 @@ public class Cliente extends Usuario {
 	 * @param cpf
 	 * @param rg
 	 * @param endereco
+	 * @param telefone
+	 * @param dataNasc
 	 * @param login
 	 * @param senha
 	 * @param dataEntrada
 	 */
-	public Cliente(String nome, int cpf, int rg, Endereco endereco, Date dataEntrada) {
-		super(nome, cpf, rg, endereco);
+	public Cliente(String nome, String cpf, String rg, String telefone, String dataNasc, Endereco endereco, String dataEntrada) {
+		super(nome, cpf, rg, telefone, dataNasc, endereco);
 		this.dataEntrada = dataEntrada;
+		
 	}
 
 	/**
 	 * @return the dataEntrada
 	 */
-	public Date getDataEntrada() {
+	public String getDataEntrada() {
 		return dataEntrada;
 	}
 
 	/**
 	 * @param dataEntrada the dataEntrada to set
 	 */
-	public void setDataEntrada(Date dataEntrada) {
+	public void setDataEntrada(String dataEntrada) {
 		this.dataEntrada = dataEntrada;
 	}
+	
+	
 }

@@ -12,13 +12,15 @@ public class Gerente extends Usuario {
 	 * @param nome
 	 * @param cpf
 	 * @param rg
+	 * @param telefone
+	 * @param dataNasc
 	 * @param endereco
 	 * @param salario
 	 * @param login
 	 * @param senha
 	 */
-	public Gerente(String nome, int cpf, int rg, Endereco endereco, BigDecimal salario, String login, String senha) {
-		super(nome, cpf, rg, endereco);
+	public Gerente(String nome, String cpf, String rg, String telefone, String dataNasc, Endereco endereco, BigDecimal salario, String login, String senha) {
+		super(nome, cpf, rg, telefone, dataNasc, endereco);
 		this.salario = salario;
 		this.login = login;
 		this.senha = senha;
