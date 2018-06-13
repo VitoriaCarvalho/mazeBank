@@ -15,7 +15,7 @@ public class EntradasErroneas {
 				valorFinal = Integer.parseInt(valor);
 				return valorFinal;
 			} catch (Exception e) {
-				System.err.println("Entrada Inválida!");
+				System.err.println("Entrada Inválida. Digite novamente!");
 			}
 		} while (true);
 	}
@@ -29,8 +29,24 @@ public class EntradasErroneas {
 				valorFinal = new BigDecimal(valor);
 				return valor;
 			} catch (Exception e) {
-				System.err.println("Entrada Inválida!");
+				System.err.println("Entrada Inválida. Digite novamente!");
 			}
 		} while (true);
+	}
+	
+	public static int validaCpf() {
+		
+		int cpf = inputInt();
+		Integer[] cpf_array = new Integer[11];
+		int cont = 10;
+		
+		while (cpf > 0) {
+			cpf_array[cont] = cpf % 10;
+			cpf = cpf/10;
+			cont--;
+		}
+		
+		return 0;
+		
 	}
 }

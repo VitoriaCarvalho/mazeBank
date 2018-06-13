@@ -52,35 +52,35 @@ public abstract class Conta {
 	/**
 	 * @return the saldo
 	 */
-	protected BigDecimal getSaldo() {
+	public BigDecimal getSaldo() {
 		return saldo;
 	}
 
 	/**
 	 * @param saldo the saldo to set
 	 */
-	protected void setSaldo(BigDecimal saldo) {
+	public void setSaldo(BigDecimal saldo) {
 		this.saldo = saldo;
 	}
 
 	/**
 	 * @return the titular
 	 */
-	protected Cliente getTitular() {
+	public Cliente getTitular() {
 		return titular;
 	}
 
 	/**
 	 * @return the numAgencia
 	 */
-	protected String getNumAgencia() {
+	public String getNumAgencia() {
 		return numAgencia;
 	}
 
 	/**
 	 * @return the numConta
 	 */
-	protected String getNumConta() {
+	public String getNumConta() {
 		return numConta;
 	}
 

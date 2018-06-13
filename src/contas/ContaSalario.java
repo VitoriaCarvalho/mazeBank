@@ -8,7 +8,7 @@ import exceptions.TaPobreException;
  * Nesta classe o método de depósito pode ser utilizado apenas pelo gerente, intermediando o empregador.
  * @author vitoria and Jederson 
  */
-public class ContaSalario extends Conta{
+public class ContaSalario extends Conta {
 	private ContaCorrente contaAnexada;
 	
 	/**

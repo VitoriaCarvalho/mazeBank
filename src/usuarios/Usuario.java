@@ -1,11 +1,13 @@
 package usuarios;
 
+import java.util.Date;
+
 public class Usuario {
 	private String nome;
 	private int cpf;
 	private int rg;
 	private Endereco endereco;
-	
+
 	public Usuario () {}
 	
 	/**

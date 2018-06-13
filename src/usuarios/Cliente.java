@@ -21,8 +21,8 @@ public class Cliente extends Usuario {
 	 * @param senha
 	 * @param dataEntrada
 	 */
-	public Cliente(String nome, int cpf, int rg, Endereco endereco, String login, String senha, Date dataEntrada) {
-		super(nome, cpf, rg, endereco, login, senha);
+	public Cliente(String nome, int cpf, int rg, Endereco endereco, Date dataEntrada) {
+		super(nome, cpf, rg, endereco);
 		this.dataEntrada = dataEntrada;
 	}
 
