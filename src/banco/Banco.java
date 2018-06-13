@@ -12,14 +12,14 @@ public class Banco {
 	public static ArrayList<Usuario> usuarios;
 	
 	public static void main(String[] args) {
-		int opcao = 0;
+		String opcao = null;
 		contas = new ArrayList<>();
 		usuarios = new ArrayList<>();
 		
 		/**
 		 * Este objeto representa o administrador do sistema
 		 */
-		Gerente admin = new Gerente("Master", 0, 0, null, null, "master", "123");
+		Gerente admin = new Gerente("Master", null, null, null, null, null, null, "master", "123");
 		usuarios.add(admin);
 		
 		do {
@@ -30,20 +30,38 @@ public class Banco {
 			System.out.println("| 2 - Entrar como cliente |");
 			System.out.println("| 0 - Sair                |");
 			System.out.println("+-------------------------+");
-			opcao = EntradasErroneas.inputInt();
+			opcao = EntradasErroneas.scanner.nextLine().toString();
 			
 			switch (opcao) {
-			case 1:
+			case "1":
 				if (Login.loginGerente()) {
 					MenuGerente.menuGerente();
 				} else {
-					System.err.println("Acesso negado!");
+					System.err.println("\nAcesso negado!\n");
 				}
 				break;
-			case 2:
+			case "2":
+				System.out.println("Número da conta que deseja buscar: ");
+				String num = EntradasErroneas.validaNumeros();
+				System.out.println("Número da agência: ");
+				String ag = EntradasErroneas.validaNumeros();
 				
+				for (Conta conta : Banco.contas) {
+					if (conta.getNumConta().equals(num) && conta.getNumAgencia().equals(ag)) {
+						if (conta instanceof ContaCorrente) {
+							ContaCorrente cc = (ContaCorrente) conta;
+							cc.menu();
+						} else if (conta instanceof ContaPoupanca) {
+							ContaPoupanca cp = (ContaPoupanca) conta;
+							cp.menu();
+						} else if (conta instanceof ContaSalario) {
+							ContaSalario cs = (ContaSalario) conta;
+							cs.menu();
+						}
+					}
+				}
 				break;
-			case 0:
+			case "0":
 				System.out.println("Programa encerrado. Obrigado por utilizar o MazeBank :)");
 				break;
 			default:
@@ -51,6 +69,6 @@ public class Banco {
 				break;
 			}
 			
-		} while (opcao != 0);
+		} while (!opcao.equals("0"));
 	}
 }

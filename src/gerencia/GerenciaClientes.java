@@ -1,15 +1,19 @@
 package gerencia;
 
+import java.math.BigDecimal;
+
 import banco.Banco;
 import contas.Conta;
+import contas.ContaSalario;
 import exceptions.EntradasErroneas;
+import exceptions.NegativeValueException;
 import usuarios.Cliente;
 import usuarios.Endereco;
 import usuarios.Usuario;
 
 public class GerenciaClientes {
 	public static void gerenciaClientes() {
-		int opcao;
+		String opcao;
 		do {
 			System.out.println("+--------------------------------+");
 			System.out.println("|      Gerência de clientes      |");
@@ -22,32 +26,32 @@ public class GerenciaClientes {
 			System.out.println("| 6 - Depositar em conta salário |");
 			System.out.println("| 0 - Sair                       |");
 			System.out.println("+--------------------------------+");
-			opcao = EntradasErroneas.inputInt();
+			opcao = EntradasErroneas.validaNumeros();
 			
 			switch (opcao) {
-			case 1:
+			case "1":
 				cadastrarCliente();
 				break;
-			case  2:
+			case  "2":
 				removerCliente();
 				break;
-			case 3:
+			case "3":
 				atualizarCliente();
 				break;
-			case 4:
+			case "4":
 				buscarCliente();
 				break;
-			case 5:
+			case "5":
 				listarClientes();
 				break;
-			case 6:
+			case "6":
 				depositarEmContaSalario();
 				break;
 			default:
 				System.out.println("Opção incorreta. Tente novamente!");
 				break;
 			}
-		} while (opcao != 0);
+		} while (!opcao.equals("0"));
 	}
 	
 	/**
@@ -56,9 +60,8 @@ public class GerenciaClientes {
 	public static void cadastrarCliente() {
 		
 		Usuario usuario = MenuGerente.cadastroUsuario();
-		System.out.println("Data de entrada");
 		
-		Cliente cliente =  new Cliente(usuario.getNome(), usuario.getCpf(), usuario.getRg(), usuario.getTelefone(), usuario.getDataNasc(), usuario.getEndereco(), EntradasErroneas.validaData("Data de nascimento no formato dd/mm/aaaa: "));
+		Cliente cliente =  new Cliente(usuario.getNome(), usuario.getCpf(), usuario.getRg(), usuario.getTelefone(), usuario.getDataNasc(), usuario.getEndereco(), EntradasErroneas.validaData("Data de entrada do mazeBank no formato dd/mm/aaaa: "));
 		
 		Banco.usuarios.add(cliente);
 		
@@ -71,7 +74,7 @@ public class GerenciaClientes {
 	public static void atualizarCliente() {
 		
 		System.out.println("CPF do cliente ao qual deseja atualizar os dados: ");
-		String cpf = EntradasErroneas.scanner.next().toString();
+		String cpf = EntradasErroneas.scanner.nextLine().toString();
 		for (Usuario usuario: Banco.usuarios) {
 			if (usuario instanceof Cliente) {
 				Cliente cliente = (Cliente) usuario;
@@ -85,30 +88,30 @@ public class GerenciaClientes {
 					System.out.println("Data de nascimento: " + cliente.getDataNasc());
 					System.out.println("Data de entrada: " + cliente.getDataEntrada());
 					System.out.println("---------------------------------------------");
-					int op;
+					String op;
 					
 					System.out.println("Deseja alterar seu endereço? Digite 1 para sim ou outro número para não: ");
-					op = EntradasErroneas.inputInt();
-					if (op == 1) {
+					op = EntradasErroneas.validaNumeros();
+					if (op.equals("1")) {
 						
 						Endereco end = new Endereco();
 						System.out.println("Rua: ");
-						end.setRua(EntradasErroneas.scanner.next().toString());
+						end.setRua(EntradasErroneas.scanner.nextLine().toString());
 						System.out.println("Bairro: ");
-						end.setBairro(EntradasErroneas.scanner.next().toString());
+						end.setBairro(EntradasErroneas.scanner.nextLine().toString());
 						System.out.println("Número: ");
-						end.setNumero(EntradasErroneas.inputInt());
+						end.setNumero(EntradasErroneas.validaNumeros());
 						System.out.println("Cidade: ");
-						end.setCidade(EntradasErroneas.scanner.next().toString());
+						end.setCidade(EntradasErroneas.scanner.nextLine().toString());
 						System.out.println("UF: ");
-						end.setBairro(EntradasErroneas.scanner.next().toString());
+						end.setUf(EntradasErroneas.scanner.nextLine().toString());
 						
 						cliente.setEndereco(end);
 					}
 					
 					System.out.println("Deseja alterar seu telefone? Digite 1 para sim ou 2 para não: ");
-					op = EntradasErroneas.inputInt();
-					if (op == 1) {
+					op = EntradasErroneas.validaNumeros();
+					if (op.equals("1")) {
 						System.out.println("Novo telefone: ");
 						cliente.setTelefone(EntradasErroneas.validaNumeros());
 					}
@@ -125,7 +128,7 @@ public class GerenciaClientes {
 	 */
 	public static void buscarCliente() {
 		System.out.println("CPF do cliente que deseja obter informações: ");
-		String cpf = EntradasErroneas.scanner.next().toString();
+		String cpf = EntradasErroneas.scanner.nextLine().toString();
 		for (Usuario usuario: Banco.usuarios) {
 			if (usuario instanceof Cliente) {
 				Cliente cliente = (Cliente) usuario;
@@ -160,7 +163,7 @@ public class GerenciaClientes {
 	 */
 	public static void removerCliente() {
 		System.out.println("CPF do cliente a ser removido: ");
-		String cpf = EntradasErroneas.scanner.next().toString();
+		String cpf = EntradasErroneas.scanner.nextLine().toString();
 		for (Usuario usuario: Banco.usuarios) {
 			if (usuario instanceof Cliente) {
 				Cliente cliente = (Cliente) usuario;
@@ -178,5 +181,30 @@ public class GerenciaClientes {
 		System.out.println("O login informado não pertence a nenhum cliente cadastrado no mazeBank!");
 	}
 	
-	public static void depositarEmContaSalario() {}
+	public static void depositarEmContaSalario() {
+		System.out.println("Número da conta que deseja buscar: ");
+		String num = EntradasErroneas.validaNumeros();
+		System.out.println("Número da agência: ");
+		String ag = EntradasErroneas.validaNumeros();
+		
+		for (Conta conta : Banco.contas) {
+			if (conta.getNumConta().equals(num) && conta.getNumAgencia().equals(ag)) {
+				if (conta instanceof ContaSalario) {
+					ContaSalario cs = (ContaSalario) conta;
+					do {
+						System.out.println("Informe o valor a ser depositado: ");
+						try {
+							cs.deposita(new BigDecimal(EntradasErroneas.inputBigDecimal()));
+							break;
+						} catch (NegativeValueException e) {
+							System.err.println(e.getMessage());
+						}
+					} while (true);
+					return;
+				}
+			}
+		}
+		
+		System.out.println("Conta inexistente!");
+	}
 }

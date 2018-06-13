@@ -11,7 +11,7 @@ import usuarios.Usuario;
 
 public class GerenciaGerentes {
 	public static void gerenciaGerentes() {
-		int opcao;
+		String opcao;
 		do {
 			System.out.println("+------------------------+");
 			System.out.println("|  Gerência de gerentes  |");
@@ -23,29 +23,29 @@ public class GerenciaGerentes {
 			System.out.println("| 5 - Listar gerentes    |");
 			System.out.println("| 0 - Sair               |");
 			System.out.println("+------------------------+");
-			opcao = EntradasErroneas.inputInt();
+			opcao = EntradasErroneas.validaNumeros();
 			
 			switch (opcao) {
-			case 1:
+			case "1":
 				cadastrarGerente ();
 				break;
-			case  2:
+			case  "2":
 				removerGerente();
 				break;
-			case 3:
+			case "3":
 				atualizarGerente();
 				break;
-			case 4:
+			case "4":
 				buscarGerente();
 				break;
-			case 5:
+			case "5":
 				listarGerentes();
 				break;
 			default:
 				System.err.println("Opção incorreta. Tente novamente!");
 				break;
 			}
-		} while (opcao != 0);
+		} while (!opcao.equals("0"));
 	}
 	
 	public static void cadastrarGerente() {
@@ -53,12 +53,12 @@ public class GerenciaGerentes {
 		
 		do {
 			System.out.println("Login: ");
-			login = EntradasErroneas.scanner.next().toString();
+			login = EntradasErroneas.scanner.nextLine().toString();
 			if (!Login.verificaLogin(login)) break;
 		} while (true);
 		
 		System.out.println("Senha: ");
-		senha = EntradasErroneas.scanner.next().toString();
+		senha = EntradasErroneas.scanner.nextLine().toString();
 		
 		System.out.println("Salário: ");
 		BigDecimal salario = new BigDecimal(EntradasErroneas.inputBigDecimal());
@@ -77,7 +77,7 @@ public class GerenciaGerentes {
 	 */
 	public static void removerGerente() {
 		System.out.println("Login do membro a ser removido: ");
-		String login = EntradasErroneas.scanner.next().toString();
+		String login = EntradasErroneas.scanner.nextLine().toString();
 		if (!login.equals("master")) {			
 			for (Usuario usuario: Banco.usuarios) {
 				if (usuario instanceof Gerente) {
@@ -99,7 +99,7 @@ public class GerenciaGerentes {
 	 */
 	public static void atualizarGerente() {
 		System.out.println("Login do membro que deseja alterar os dados: ");
-		String login = EntradasErroneas.scanner.next().toString();
+		String login = EntradasErroneas.scanner.nextLine().toString();
 		for (Usuario usuario: Banco.usuarios) {
 			if (usuario instanceof Gerente) {
 				Gerente gerente = (Gerente) usuario;
@@ -112,49 +112,49 @@ public class GerenciaGerentes {
 					System.out.println("RG: " + gerente.getRg());
 					System.out.println("Data de nascimento: " + gerente.getDataNasc());
 					System.out.println("---------------------------------------------");
-					int op;
+					String op;
 					
 					System.out.println("Deseja alterar seu endereço? Digite 1 para sim ou 2 para não: ");
-					op = EntradasErroneas.inputInt();
-					if (op == 1) {
+					op = EntradasErroneas.validaNumeros();
+					if (op.equals("1")) {
 						
 						Endereco end = new Endereco();
 						System.out.println("Rua: ");
-						end.setRua(EntradasErroneas.scanner.next().toString());
+						end.setRua(EntradasErroneas.scanner.nextLine().toString());
 						System.out.println("Bairro: ");
-						end.setBairro(EntradasErroneas.scanner.next().toString());
+						end.setBairro(EntradasErroneas.scanner.nextLine().toString());
 						System.out.println("Número: ");
-						end.setNumero(EntradasErroneas.inputInt());
+						end.setNumero(EntradasErroneas.scanner.nextLine().toString());
 						System.out.println("Cidade: ");
-						end.setCidade(EntradasErroneas.scanner.next().toString());
+						end.setCidade(EntradasErroneas.scanner.nextLine().toString());
 						System.out.println("UF: ");
-						end.setBairro(EntradasErroneas.scanner.next().toString());
+						end.setBairro(EntradasErroneas.scanner.nextLine().toString());
 						
 						gerente.setEndereco(end);
 					}
 					
 					System.out.println("Deseja alterar seu salário? Digite 1 para sim ou 2 para não: ");
-					op = EntradasErroneas.inputInt();
-					if (op == 1) {
+					op = EntradasErroneas.validaNumeros();
+					if (op.equals("1")) {
 						System.out.println("Novo salário: ");
-						String salario = EntradasErroneas.scanner.next().toString();
+						String salario = EntradasErroneas.scanner.nextLine().toString();
 						gerente.setSalario(new BigDecimal(EntradasErroneas.inputBigDecimal()));
 					}
 					
 					System.out.println("Deseja alterar seu telefone? Digite 1 para sim ou 2 para não: ");
-					op = EntradasErroneas.inputInt();
-					if (op == 1) {
+					op = EntradasErroneas.validaNumeros();
+					if (op.equals("1")) {
 						System.out.println("Novo telefone: ");
 						gerente.setTelefone(EntradasErroneas.validaNumeros());
 					}
 					
 					System.out.println("Deseja alterar seu login? Digite 1 para sim ou 2 para não: ");
-					op = EntradasErroneas.inputInt();
-					if (op == 1) {
+					op = EntradasErroneas.validaNumeros();
+					if (op.equals("1")) {
 						String l;
 						do {
 							System.out.println("Novo login: ");
-							l = EntradasErroneas.scanner.next().toString();
+							l = EntradasErroneas.scanner.nextLine().toString();
 							if (!Login.verificaLogin(l)) break;
 							System.err.println("\nLogin existente!\n");
 						} while (true);
@@ -163,10 +163,10 @@ public class GerenciaGerentes {
 					}
 					
 					System.out.println("Deseja alterar sua senha? Digite 1 para sim ou 2 para não: ");
-					op = EntradasErroneas.inputInt();
-					if (op == 1) {
+					op = EntradasErroneas.validaNumeros();
+					if (op.equals("1")) {
 						System.out.println("Senha: ");
-						gerente.setSenha(EntradasErroneas.scanner.next().toString());
+						gerente.setSenha(EntradasErroneas.scanner.nextLine().toString());
 					}
 					
 					System.out.println("------------ DADOS ATUALIZADOS ------------\n");
@@ -181,7 +181,7 @@ public class GerenciaGerentes {
 	 */
 	public static void buscarGerente () {
 		System.out.println("Login do gerente que deseja obter informações: ");
-		String login = EntradasErroneas.scanner.next().toString();
+		String login = EntradasErroneas.scanner.nextLine().toString();
 		for (Usuario usuario: Banco.usuarios) {
 			if (usuario instanceof Gerente) {
 				Gerente gerente = (Gerente) usuario;

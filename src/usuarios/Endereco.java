@@ -3,7 +3,7 @@ package usuarios;
 public class Endereco {
 	protected String rua;
 	protected String bairro;
-	protected int numero;
+	protected String numero;
 	protected String cidade;
 	protected String uf;
 	/**
@@ -33,13 +33,13 @@ public class Endereco {
 	/**
 	 * @return the numero
 	 */
-	public int getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 	/**
 	 * @param numero the numero to set
 	 */
-	public void setNumero(int numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 	/**

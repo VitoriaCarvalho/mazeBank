@@ -7,24 +7,6 @@ public class EntradasErroneas {
 	public static Scanner scanner = new Scanner(System.in);
 	
 	/**
-	 * Método para validar entradas de números inteiros
-	 * @return valor inteiro após a conversão
-	 */
-	public static int inputInt () {
-		String valor;
-		int valorFinal = 0;
-		do {			
-			valor = scanner.nextLine();
-			try {				
-				valorFinal = Integer.parseInt(valor);
-				return valorFinal;
-			} catch (Exception e) {
-				System.err.println("Entrada Inválida. Digite novamente!");
-			}
-		} while (true);
-	}
-	
-	/**
 	 * Método para validar entradas de objetos BigDecimal
 	 * @return valor em BigDecimal, após a instância ser feita com sucesso
 	 */
@@ -51,13 +33,13 @@ public class EntradasErroneas {
 		Long valorFinal;
 		do {
 			System.out.println(message);
-			valor = scanner.next().toString();
+			valor = scanner.nextLine().toString();
 			//valorFinal = valor;
 			try {				
 				valorFinal = Long.parseLong(valor);
 				return valor;
 			} catch (Exception e) {
-				System.err.println("Número de identificação inválido. Digite novamente!");
+				System.err.println("\nNúmero de identificação inválido. Digite novamente!\n");
 			}
 		} while (true);
 	}
@@ -74,7 +56,7 @@ public class EntradasErroneas {
 		do {
 			try {
 				System.out.println(message);
-				dataValida = scanner.next().toString();
+				dataValida = scanner.nextLine().toString();
 				data = dataValida.split("/");
 				
 				dia = Integer.parseInt(data[0]);
@@ -100,7 +82,7 @@ public class EntradasErroneas {
 		
 		do {
 			try {
-				num = scanner.next().toString();
+				num = scanner.nextLine().toString();
 				valor = Long.parseLong(num);
 				return num;
 			} catch (Exception e) {

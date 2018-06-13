@@ -20,9 +20,9 @@ public class Login {
 		System.out.println("|         Acesso        |");
 		System.out.println("+-----------------------+");
 		System.out.print("Login: ");
-		String login = EntradasErroneas.scanner.nextLine();
+		String login = EntradasErroneas.scanner.nextLine().toString();
 		System.out.println("Senha: ");
-		String senha = EntradasErroneas.scanner.nextLine();
+		String senha = EntradasErroneas.scanner.nextLine().toString();
 		System.out.println("+-----------------------+");
 		for (Usuario usuario : Banco.usuarios) {
 			if (usuario instanceof Gerente) {

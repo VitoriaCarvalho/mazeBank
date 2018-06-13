@@ -7,8 +7,8 @@ import exceptions.EntradasErroneas;
 public class Cambio {
 
 	
-	public static int menuMoedas() {
-		int op;
+	public static String menuMoedas() {
+		String op;
 		System.out.println("+----------------------+");
 		System.out.println("|         MOEDA        |");
 		System.out.println("+----------------------+");
@@ -18,7 +18,7 @@ public class Cambio {
 		System.out.println("| 4- Euro              |");
 		System.out.println("| 5- Won Sul-coreano   |");
 		System.out.println("+----------------------+");
-		op = EntradasErroneas.inputInt();
+		op = EntradasErroneas.validaNumeros();
 		return op;
 	}
 	
@@ -28,24 +28,24 @@ public class Cambio {
 	 * @return valor convertido para real
 	 */
 	public static BigDecimal converteParaReal(BigDecimal valor) {
-		int opcao;
+		String opcao;
 		do {
 			opcao = menuMoedas();
 			switch (opcao) {
-			case 1:
+			case "1":
 				return valor;
-			case 2:
+			case "2":
 				return valor.multiply(new BigDecimal("3.7"));
-			case 3:
+			case "3":
 				return valor.multiply(new BigDecimal("2.85"));
-			case 4:
+			case "4":
 				return valor.multiply(new BigDecimal("4.37"));
-			case 5:
+			case "5":
 				return valor.multiply(new BigDecimal("0.003428"));
 			default:
 				System.err.println("Opção incorreta. Tente novamente!");
 			}
-		} while (opcao < 1 || opcao > 5);
+		} while (Integer.parseInt(opcao) < 1 || Integer.parseInt(opcao) > 5);
 		return valor;
 	}
 	
@@ -55,24 +55,24 @@ public class Cambio {
 	 * @return valor convertido para a moeda escolhida
 	 */
 	public static String converteDeReal(BigDecimal valor) {
-		int opcao;
+		String opcao;
 		do {
 			opcao = menuMoedas();
 			switch (opcao) {
-			case 1:
+			case "1":
 				return "R$ " + valor.toString();
-			case 2:
+			case "2":
 				return "U$ " + valor.divide(new BigDecimal("3.7")).toString();
-			case 3:
+			case "3":
 				return "C$ " + valor.divide(new BigDecimal("2.85"));
-			case 4:
+			case "4":
 				return "€ " + valor.divide(new BigDecimal("4.37"));
-			case 5:
+			case "5":
 				return "W " + valor.divide(new BigDecimal("0.003428"));
 			default:
 				System.err.println("Opção incorreta. Tente novamente!");
 			}
-		} while (opcao < 1 || opcao > 5);
+		} while (Integer.parseInt(opcao) < 1 || Integer.parseInt(opcao) > 5);
 		return "R$ " + valor.toString();
 	}
 }

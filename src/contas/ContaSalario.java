@@ -35,7 +35,7 @@ public class ContaSalario extends Conta {
 	
 	@Override
 	public void menu() {
-		int opcao;
+		String opcao;
 		
 		do {			
 			try {
@@ -46,18 +46,18 @@ public class ContaSalario extends Conta {
 				System.out.println("| 2 - Ver Saldo               |");
 				System.out.println("| 0 - Sair                    |");
 				System.out.println("+-----------------------------+");
-				opcao = EntradasErroneas.inputInt();
+				opcao = EntradasErroneas.validaNumeros();
 				
 				switch (opcao) {
-				case 1:
+				case "1":
 					System.out.println("\nTransferência para a conta corrente anexada:\n");
 					this.transfere();
 					break;
-				case 2:
+				case "2":
 					System.out.println("\nConsulta de saldo:\n");
 					System.out.println(this.toString());
 					break;
-				case 0:
+				case "0":
 					break;
 				default:
 					System.err.println("Opção incorreta. Tente novamente!");

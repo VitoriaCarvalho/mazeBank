@@ -10,7 +10,7 @@ import exceptions.EntradasErroneas;
 public class GerenciaContas {
 
 	public static void gerenciaContas() {
-		int opcao;
+		String opcao;
 		do {
 			System.out.println("+------------------------+");
 			System.out.println("|   Gerência de contas   |");
@@ -21,10 +21,10 @@ public class GerenciaContas {
 			System.out.println("| 4 - Listar contas      |");
 			System.out.println("| 0 - Sair               |");
 			System.out.println("+------------------------+");
-			opcao = EntradasErroneas.inputInt();
+			opcao = EntradasErroneas.validaNumeros();
 			
 			switch (opcao) {
-			case 1:
+			case "1":
 				do {
 					System.out.println("+------------------------+");
 					System.out.println("|     Tipo de conta      |");
@@ -34,44 +34,44 @@ public class GerenciaContas {
 					System.out.println("| 3 - Salário            |");
 					System.out.println("| 0 - Sair               |");
 					System.out.println("+------------------------+");
-					opcao = EntradasErroneas.inputInt();
+					opcao = EntradasErroneas.validaNumeros();
 					
-					if (opcao == 1) {
+					if (opcao.equals("1")) {
 						ContaCorrente cc = new ContaCorrente();
 						cc.cadastrarConta();
 						Banco.contas.add(cc);
 						break;
-					} else if (opcao == 2) {
+					} else if (opcao.equals("2")) {
 						ContaPoupanca cp = new ContaPoupanca();
 						cp.cadastrarConta();
 						Banco.contas.add(cp);
 						break;
-					} else if (opcao == 3) {
+					} else if (opcao.equals("3")) {
 						ContaSalario cs = new ContaSalario();
 						cs.cadastrarConta();
 						Banco.contas.add(cs);
 						break;
-					} else if (opcao == 0) {
+					} else if (opcao.equals("0")) {
 						break;
 					} else {
 						System.err.println("Opção incorreta. Tente novamente!");
 					}
 				} while (true);
 				break;
-			case  2:
+			case  "2":
 				removerConta();
 				break;
-			case 3:
+			case "3":
 				buscarConta();
 				break;
-			case 4:
+			case "4":
 				listarContas();
 				break;
 			default:
 				System.err.println("Opção incorreta. Tente novamente!");
 				break;
 			}
-		} while (opcao != 0);
+		} while (!opcao.equals("0"));
 	}
 
 

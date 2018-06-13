@@ -9,7 +9,7 @@ import usuarios.Usuario;
  *
  */
 public class MenuGerente {
-	static int opcao = 0;
+	static String opcao = null;
 	public static void menuGerente() {
 		
 		do {
@@ -21,24 +21,24 @@ public class MenuGerente {
 			System.out.println("| 3 - Criar contas       |");
 			System.out.println("| 0 - Sair               |");
 			System.out.println("+------------------------+");
-			opcao = EntradasErroneas.inputInt();
+			opcao = EntradasErroneas.validaNumeros();
 			
 			switch (opcao) {
-			case 1:
+			case "1":
 				GerenciaClientes.gerenciaClientes();
 				break;
-			case 2:
+			case "2":
 				GerenciaGerentes.gerenciaGerentes();
 				break;
-			case 3:
+			case "3":
 				GerenciaContas.gerenciaContas();
-			case 0:
+			case "0":
 				
 				break;
 			default:
 				break;
 			}
-		} while (opcao != 0);
+		} while (!opcao.equals("0"));
 	}
 
 	
@@ -49,7 +49,7 @@ public class MenuGerente {
 		String nome, cpf, rg, tel, dataNasc;
 		
 		System.out.println("Nome: ");
-		nome = EntradasErroneas.scanner.next().toString();
+		nome = EntradasErroneas.scanner.nextLine().toString();
 		
 		cpf = EntradasErroneas.validaID("CPF com 11 números, sem caracteres de separação: ");
 		
@@ -61,21 +61,21 @@ public class MenuGerente {
 		
 		System.out.println("Telefone: ");
 		tel = EntradasErroneas.validaNumeros();
-	
+		
 		System.out.println("Rua: ");
-		end.setRua(EntradasErroneas.scanner.next().toString());
+		end.setRua(EntradasErroneas.scanner.nextLine().toString());
 		
 		System.out.println("Bairro: ");
-		end.setBairro(EntradasErroneas.scanner.next().toString());
+		end.setBairro(EntradasErroneas.scanner.nextLine().toString());
 		
 		System.out.println("Número: ");
-		end.setNumero(EntradasErroneas.inputInt());
+		end.setNumero(EntradasErroneas.validaNumeros());
 		
 		System.out.println("Cidade: ");
-		end.setCidade(EntradasErroneas.scanner.next().toString());
+		end.setCidade(EntradasErroneas.scanner.nextLine().toString());
 		
 		System.out.println("UF: ");
-		end.setUf(EntradasErroneas.scanner.next().toString());
+		end.setUf(EntradasErroneas.scanner.nextLine().toString());
 		
 		return new Usuario(nome, cpf, rg, tel, dataNasc, end);
 	}
