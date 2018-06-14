@@ -161,7 +161,9 @@ public class ContaCorrente extends Conta implements Transferencia_Saque {
 		this.setDivida(new BigDecimal(EntradasErroneas.inputBigDecimal()));
 	}
 	
-
+	/**
+	 * Método para realizar o pagamento da dívida do empréstimo não consignado
+	 */
 	private void debitarEmprestimo() {
 		
 		if (this.getDivida().compareTo(new BigDecimal("0")) > 0) {
