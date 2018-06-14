@@ -15,7 +15,16 @@ import exceptions.TransferenciaRecursivaException;
  *
  */
 public class ContaCorrente extends Conta implements Transferencia_Saque {
+	private BigDecimal divida;
 	
+	public BigDecimal getDivida() {
+		return divida;
+	}
+
+	public void setDivida(BigDecimal divida) {
+		this.divida = divida;
+	}
+
 	@Override
 	public boolean sacar(BigDecimal valor) throws TaPobreException, NegativeValueException {	
 		if (getSaldo().compareTo(valor) >= 0) {			
@@ -52,16 +61,18 @@ public class ContaCorrente extends Conta implements Transferencia_Saque {
 		
 		do {			
 			try {
-				System.out.println("+-----------------------------+");
-				System.out.println("|        Conta Corrente       |");
-				System.out.println("+-----------------------------+");
-				System.out.println("| 1 - Depositar               |");
-				System.out.println("| 2 - Sacar                   |");
-				System.out.println("| 3 - Transferir              |");
-				System.out.println("| 4 - Ver Saldo               |");
-				System.out.println("| 5 - Emprestimo Consignado   |");
-				System.out.println("| 0 - Sair                    |");
-				System.out.println("+-----------------------------+");
+				System.out.println("+-----------------------------------+");
+				System.out.println("|          Conta Corrente           |");
+				System.out.println("+-----------------------------------+");
+				System.out.println("| 1 - Depositar                     |");
+				System.out.println("| 2 - Sacar                         |");
+				System.out.println("| 3 - Transferir                    |");
+				System.out.println("| 4 - Ver Saldo                     |");
+				System.out.println("| 5 - Emprestimo Consignado         |");
+				System.out.println("| 6 - Emprestimo Não Consignado (NC)|");
+				System.out.println("| 7 - Debitar Empŕestimo NC         |");
+				System.out.println("| 0 - Sair                          |");
+				System.out.println("+-----------------------------------+");
 				opcao = EntradasErroneas.validaNumeros();
 				
 				switch (opcao) {
@@ -104,6 +115,12 @@ public class ContaCorrente extends Conta implements Transferencia_Saque {
 				case "5":
 					this.emprestimoConsignado();
 					break;
+				case "6":
+					this.emprestimoNaoConsignado();
+					break;
+				case "7":
+					this.debitarEmprestimo();
+					break;
 				case "0":
 					break;
 				default:
@@ -134,5 +151,31 @@ public class ContaCorrente extends Conta implements Transferencia_Saque {
 		}
 		
 		System.out.println("Você não tem conta salário associada, o empréstimo consignado não pode ser realizado!");
+	}
+	
+	/**
+	 * Método que concede um empréstimo não consignado a um cliente  
+	 */
+	private void emprestimoNaoConsignado() {
+		System.out.println("Informe o valor do empréstimo: ");
+		this.setDivida(new BigDecimal(EntradasErroneas.inputBigDecimal()));
+	}
+	
+
+	private void debitarEmprestimo() {
+		
+		if (this.getDivida().compareTo(new BigDecimal("0")) > 0) {
+			System.out.println("Sua dívida é de: R$ " + this.getDivida());
+			if (this.getSaldo().compareTo(this.getDivida()) >= 0) {
+				this.setSaldo(this.getSaldo().subtract(this.getDivida()));
+				this.setDivida(new BigDecimal("0"));
+				System.out.println("Dívida paga!");
+			} else {
+				System.out.println("Seu saldo é insuficiente para pagar a dívida!");
+			} 
+		} else {
+			System.out.println("Você não possui dívidas!");
+		}
+		
 	}
 }

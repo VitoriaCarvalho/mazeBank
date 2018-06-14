@@ -118,6 +118,9 @@ public class GerenciaContas {
 					System.out.println("|         Conta Corrente         |");
 					System.out.println("+--------------------------------+");
 					System.out.println(conta.toString());
+					ContaCorrente cc = (ContaCorrente) conta;
+					System.out.println("Dívida: R$ " + cc.getDivida());
+					System.out.println("+--------------------------------+");
 				} else if (conta instanceof ContaPoupanca) {
 					System.out.println("+--------------------------------+");
 					System.out.println("|         Conta Poupanca         |");
@@ -143,6 +146,9 @@ public class GerenciaContas {
 				System.out.println("|         Conta Corrente         |");
 				System.out.println("+--------------------------------+");
 				System.out.println(conta.toString());
+				ContaCorrente cc = (ContaCorrente) conta;
+				System.out.println("Dívida: R$ " + cc.getDivida());
+				System.out.println("+--------------------------------+");
 			} else if (conta instanceof ContaPoupanca) {
 				System.out.println("+--------------------------------+");
 				System.out.println("|         Conta Poupanca         |");

@@ -207,7 +207,9 @@ public abstract class Conta implements Serializable{
 		}
 		
 		if (tipo.equals("corrente")) {
-			Banco.contas.add((ContaCorrente) this);
+			ContaCorrente cs = (ContaCorrente) this;
+			cs.setDivida(new BigDecimal("0"));
+			Banco.contas.add(cs);
 		} else if (tipo.equals("poupanca")) {
 			Banco.contas.add((ContaPoupanca) this);
 		}
