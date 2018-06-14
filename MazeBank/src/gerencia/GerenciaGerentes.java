@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import banco.Banco;
 import banco.Login;
 import exceptions.EntradasErroneas;
-import usuarios.Cliente;
 import usuarios.Endereco;
 import usuarios.Gerente;
 import usuarios.Usuario;
