@@ -69,14 +69,14 @@ public class ContaCorrente extends Conta implements Transferencia_Saque {
 					System.out.println("Informe o valor a se depositar: ");
 					valor = new BigDecimal(EntradasErroneas.inputBigDecimal());
 					valor = Cambio.converteParaReal(valor);
-					System.out.println("Valor convertido para real.");
 					this.deposita(valor);
+					System.out.println("Valor convertido para real.");
 					break;
 				case "2":
 					System.out.println("Informe o valor do saque: ");
 					valor = new BigDecimal(EntradasErroneas.inputBigDecimal());
-					System.out.println("R$ " + valor + " convertido para " + Cambio.converteDeReal(valor));
 					this.sacar(valor);
+					System.out.println("R$ " + valor + " convertido para " + Cambio.converteDeReal(valor));
 					break;
 				case "3":
 					System.out.println("Informe o número da conta destino: ");

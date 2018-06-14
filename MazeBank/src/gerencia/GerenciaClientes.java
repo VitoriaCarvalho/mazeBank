@@ -132,6 +132,7 @@ public class GerenciaClientes {
 					}
 					
 					System.out.println("------------ DADOS ATUALIZADOS ------------\n");
+					return;
 				}
 			}
 		}

@@ -65,10 +65,12 @@ public class Banco {
 				String num = EntradasErroneas.validaNumeros();
 				System.out.println("Número da agência: ");
 				String ag = EntradasErroneas.validaNumeros();
+				System.out.println("Senha: ");
+				String senha = EntradasErroneas.scanner.nextLine().toString();
 				int flag = 0;
 				
 				for (Conta conta : Banco.contas) {
-					if (conta.getNumConta().equals(num) && conta.getNumAgencia().equals(ag)) {
+					if (conta.getNumConta().equals(num) && conta.getNumAgencia().equals(ag) && conta.getSenha().equals(senha)) {
 						flag = 1;
 						if (conta instanceof ContaCorrente) {
 							ContaCorrente cc = (ContaCorrente) conta;

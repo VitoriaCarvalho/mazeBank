@@ -47,12 +47,10 @@ public class GerenciaContas {
 					if (opcao.equals("1")) {
 						ContaCorrente cc = new ContaCorrente();
 						cc.cadastrarConta("corrente");
-						Banco.contas.add(cc);
 						break;
 					} else if (opcao.equals("2")) {
 						ContaPoupanca cp = new ContaPoupanca();
 						cp.cadastrarConta("poupanca");
-						Banco.contas.add(cp);
 						break;
 					} else if (opcao.equals("3")) {
 						ContaSalario cs = new ContaSalario();

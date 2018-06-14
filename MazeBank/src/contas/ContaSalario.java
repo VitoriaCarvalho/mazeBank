@@ -69,7 +69,7 @@ public class ContaSalario extends Conta {
 				switch (opcao) {
 				case "1":
 					System.out.println("\nTransferência para a conta corrente anexada:\n");
-					this.transfere();
+					transfere();
 					break;
 				case "2":
 					System.out.println("\nConsulta de saldo:\n");
@@ -84,6 +84,7 @@ public class ContaSalario extends Conta {
 				}	
 			} catch (Exception e) {
 				System.err.println(e.getMessage());
+//				e.printStackTrace();
 			}
 		} while (!opcao.equals("0"));
 	}
@@ -127,7 +128,11 @@ public class ContaSalario extends Conta {
 								
 								this.titular = cliente;
 								
+								this.contaAnexada = (ContaCorrente) conta;
+								
 								this.saldo = new BigDecimal("0");
+								
+								this.divida = new BigDecimal("0");
 								
 								Banco.contas.add(this);
 								
@@ -141,7 +146,7 @@ public class ContaSalario extends Conta {
 		}
 		
 		if (flagCC == 0) {
-			System.out.println("Desculpe, a conta não pode ser aberta porque o cliente não possui conta conrrente.");
+			System.out.println("Desculpe, a conta não pode ser aberta porque o cliente não possui conta corrente.");
 		}
 		
 		if (flagCli == 0) {

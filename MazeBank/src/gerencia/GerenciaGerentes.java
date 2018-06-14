@@ -193,6 +193,7 @@ public class GerenciaGerentes {
 					}
 					
 					System.out.println("------------ DADOS ATUALIZADOS ------------\n");
+					return;
 				}
 			}
 		}
@@ -230,7 +231,6 @@ public class GerenciaGerentes {
 				if (!gerente.getLogin().equals("master")) {					
 					System.out.println(gerente.toString());
 					System.out.println("Login: " + gerente.getLogin());
-					System.out.println(gerente.toString());
 					System.out.println("Salário: R$ " + gerente.getSalario());
 				} 
 			}

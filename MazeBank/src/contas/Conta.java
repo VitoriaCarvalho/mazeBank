@@ -206,6 +206,12 @@ public abstract class Conta implements Serializable{
 			}
 		}
 		
+		if (tipo.equals("corrente")) {
+			Banco.contas.add((ContaCorrente) this);
+		} else if (tipo.equals("poupanca")) {
+			Banco.contas.add((ContaPoupanca) this);
+		}
+		
 		if (flag == 0) {
 			System.out.println("Desculpe, a conta não pode ser aberta porque o cliente não existe.\n"
 					+ "Realize seu cadastro e depois crie a conta!");
