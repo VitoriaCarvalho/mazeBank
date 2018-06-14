@@ -67,13 +67,13 @@ public class Cambio {
 			case "1":
 				return "R$ " + valor.toString();
 			case "2":
-				return "U$ " + valor.divide(new BigDecimal("3.7")).toString();
+				return "U$ " + valor.divide(new BigDecimal("3.7"), BigDecimal.ROUND_UP).toString();
 			case "3":
-				return "C$ " + valor.divide(new BigDecimal("2.85"));
+				return "C$ " + valor.divide(new BigDecimal("2.85"), BigDecimal.ROUND_UP);
 			case "4":
-				return "€ " + valor.divide(new BigDecimal("4.37"));
+				return "€ " + valor.divide(new BigDecimal("4.37"), BigDecimal.ROUND_UP);
 			case "5":
-				return "W " + valor.divide(new BigDecimal("0.003428"));
+				return "W " + valor.divide(new BigDecimal("0.003428"), BigDecimal.ROUND_UP);
 			default:
 				System.err.println("Opção incorreta. Tente novamente!");
 			}
