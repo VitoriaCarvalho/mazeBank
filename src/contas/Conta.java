@@ -9,8 +9,8 @@ import usuarios.Cliente;
 import usuarios.Usuario;
 
 /**
- * 
- * @author vitoria
+ * Essa superclasse contém os atributos e métodos em comum nos três tipos de contas do mazeBank.
+ * @author vitoria and Jederson
  *
  */
 public abstract class Conta {
@@ -143,9 +143,12 @@ public abstract class Conta {
 		return sb.toString();
 	}	
 
+	/**
+	 * Método para abrir uma nova conta no banco, se o cliente já estiver cadastrado.
+	 */
 	public void cadastrarConta() {
 		
-		String cpf = EntradasErroneas.validaID("CPF do cliente: ");
+		String cpf = EntradasErroneas.validaCPF("CPF do cliente: ");
 		int flag = 0;
 		Cliente cliente = null;
 		

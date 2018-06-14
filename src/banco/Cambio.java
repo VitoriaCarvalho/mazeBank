@@ -4,6 +4,11 @@ import java.math.BigDecimal;
 
 import exceptions.EntradasErroneas;
 
+/**
+ * Classe criada para simular um sistema de câmbio de moedas. Ao receber um valor de uma das moedas presentes no menu, o sistema irá converter para real. No saque, o cliente pode optar por receber o valor convertido para uma das moedas das opções.
+ * @author vitoria and Jederson
+ *
+ */
 public class Cambio {
 
 	

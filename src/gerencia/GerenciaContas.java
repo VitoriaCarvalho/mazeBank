@@ -7,8 +7,16 @@ import contas.ContaPoupanca;
 import contas.ContaSalario;
 import exceptions.EntradasErroneas;
 
+/**
+ * Classe responsável por realizar as funções de gerenciamento das contas no sistema.
+ * @author vitoria and Jederson
+ *
+ */
 public class GerenciaContas {
 
+	/**
+	 * Método que faz a interação entre o gerente logado no sistema e as funções de gerenciamento de contas.
+	 */
 	public static void gerenciaContas() {
 		String opcao;
 		do {
@@ -76,7 +84,7 @@ public class GerenciaContas {
 
 
 	/**
-	 * 
+	 * Método responsável por remover uma conta do banco, caso exista.
 	 */
 	private static void removerConta() {
 		System.out.println("Número da conta que deseja remover: ");
@@ -95,6 +103,9 @@ public class GerenciaContas {
 		System.out.println("Conta inexistente! Verifique os números da conta e agência digitados.");
 	}
 	
+	/**
+	 * Método responsável por buscar uma conta e mostrar suas informações.
+	 */
 	private static void buscarConta() {
 		System.out.println("Número da conta que deseja buscar: ");
 		String num = EntradasErroneas.validaNumeros();
@@ -123,6 +134,9 @@ public class GerenciaContas {
 		}
 	}
 	
+	/**
+	 * Método responsável por listar todas as contas, exibindo suas informações.
+	 */
 	private static void listarContas() {
 		for (Conta conta : Banco.contas) {
 			if (conta instanceof ContaCorrente) {

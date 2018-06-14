@@ -11,7 +11,16 @@ import usuarios.Cliente;
 import usuarios.Endereco;
 import usuarios.Usuario;
 
+/**
+ * Classe responsável por realizar as funções de gerenciamento de clientes no sistema.
+ * @author vitoria and Jederson
+ *
+ */
 public class GerenciaClientes {
+	
+	/**
+	 * Método que faz a interação entre o gerente logado no sistema e as funções de gerenciamento de clientes.
+	 */
 	public static void gerenciaClientes() {
 		String opcao;
 		do {
@@ -47,6 +56,8 @@ public class GerenciaClientes {
 			case "6":
 				depositarEmContaSalario();
 				break;
+			case "0":
+				break;
 			default:
 				System.out.println("Opção incorreta. Tente novamente!");
 				break;
@@ -60,6 +71,10 @@ public class GerenciaClientes {
 	public static void cadastrarCliente() {
 		
 		Usuario usuario = MenuGerente.cadastroUsuario();
+		if (!EntradasErroneas.verificaMaiorIdade(usuario.getDataNasc())) {
+			System.err.println("\n\nUsuário menor de idade!\nPara possuir cadastro o cliente precisa ter 18 anos ou mais.\n\n");
+			return;
+		}
 		
 		Cliente cliente =  new Cliente(usuario.getNome(), usuario.getCpf(), usuario.getRg(), usuario.getTelefone(), usuario.getDataNasc(), usuario.getEndereco(), EntradasErroneas.validaData("Data de entrada do mazeBank no formato dd/mm/aaaa: "));
 		
@@ -90,7 +105,7 @@ public class GerenciaClientes {
 					System.out.println("---------------------------------------------");
 					String op;
 					
-					System.out.println("Deseja alterar seu endereço? Digite 1 para sim ou outro número para não: ");
+					System.out.println("Deseja alterar seu endereço? Digite 1 para sim ou qualquer outro número para não: ");
 					op = EntradasErroneas.validaNumeros();
 					if (op.equals("1")) {
 						
@@ -109,7 +124,7 @@ public class GerenciaClientes {
 						cliente.setEndereco(end);
 					}
 					
-					System.out.println("Deseja alterar seu telefone? Digite 1 para sim ou 2 para não: ");
+					System.out.println("Deseja alterar seu telefone? Digite 1 para sim ou qualquer outro número para não: ");
 					op = EntradasErroneas.validaNumeros();
 					if (op.equals("1")) {
 						System.out.println("Novo telefone: ");
@@ -133,7 +148,7 @@ public class GerenciaClientes {
 			if (usuario instanceof Cliente) {
 				Cliente cliente = (Cliente) usuario;
 				if (cliente.getCpf().equals(cpf)) {
-					cliente.toString();
+					System.out.println(cliente.toString());
 					return;
 				}
 			}
@@ -145,9 +160,9 @@ public class GerenciaClientes {
 	 * Método para mostrar todos os clientes cadastrados no sistema.
 	 */
 	public static void listarClientes() {
-		System.out.println("\n+----------------------------------------------+");
-		System.out.println("|             CLIENTES CADASTRADOS             |");
-		System.out.println("+----------------------------------------------+");
+		System.out.println("\n+------------------------------------------------------+");
+		System.out.println("|                  CLIENTES CADASTRADOS                |");
+		System.out.println("+------------------------------------------------------+");
 		for (Usuario usuario: Banco.usuarios) {
 			if (usuario instanceof Cliente) {
 				Cliente cliente = (Cliente) usuario;
@@ -155,7 +170,7 @@ public class GerenciaClientes {
 				System.out.println("Data de entrada: " + cliente.getDataEntrada());
 			}
 		}
-		System.out.println("+----------------------------------------------+\n");
+		System.out.println("+------------------------------------------------------+");
 	}
 	
 	/**
@@ -171,6 +186,7 @@ public class GerenciaClientes {
 					for (Conta conta : Banco.contas) {
 						if (conta.getTitular().equals(cliente)) {
 							Banco.contas.remove(conta);
+							System.out.println("\nCliente removido!\n");
 						}
 					}
 					Banco.usuarios.remove(cliente);
@@ -181,6 +197,9 @@ public class GerenciaClientes {
 		System.out.println("O login informado não pertence a nenhum cliente cadastrado no mazeBank!");
 	}
 	
+	/**
+	 * Método para realizar o depósito do empregador para a conta salário do empregado. O gerente é responsável por intermediar essa ação, portanto, somente ele possui acesso a esse método.
+	 */
 	public static void depositarEmContaSalario() {
 		System.out.println("Número da conta que deseja buscar: ");
 		String num = EntradasErroneas.validaNumeros();

@@ -4,12 +4,18 @@ import exceptions.EntradasErroneas;
 import usuarios.Endereco;
 import usuarios.Usuario;
 
+
 /**
- * @author vitoria
+ * Classe responsável por fazer a interação entre o gerente logado no sistema e as ações de gerência.
+ * @author vitoria and Jederson
  *
  */
 public class MenuGerente {
 	static String opcao = null;
+	
+	/**
+	 * Menu principal das funções de gerência, é ele que utiliza os métodos das classes de gerência de clientes, de gerentes e de contas.
+	 */
 	public static void menuGerente() {
 		
 		do {
@@ -44,16 +50,19 @@ public class MenuGerente {
 	
 
 	
-	
+	/**
+	 * Método responsável por cadastrar um usuário, seja ele cliente ou gerente.
+	 * @return Objeto do tipo Usuario
+	 */
 	public static Usuario cadastroUsuario () {
 		String nome, cpf, rg, tel, dataNasc;
 		
 		System.out.println("Nome: ");
 		nome = EntradasErroneas.scanner.nextLine().toString();
 		
-		cpf = EntradasErroneas.validaID("CPF com 11 números, sem caracteres de separação: ");
+		cpf = EntradasErroneas.validaCPF("CPF com 11 números, sem caracteres de separação: ");
 		
-		rg = EntradasErroneas.validaID("RG, sem caracteres de separação: ");
+		rg = EntradasErroneas.validaRG("RG, sem caracteres de separação: ");
 		
 		dataNasc = EntradasErroneas.validaData("Informe a data de nascimento no formato dd/mm/aaaa: ");
 		

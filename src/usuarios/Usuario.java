@@ -1,23 +1,12 @@
 package usuarios;
 
-import java.util.Date;
-
+/**
+ * Classe que representa um usuário do banco, contendo os atributos que o identificam. 
+ * @author vitoria and Jederson
+ *
+ */
 public class Usuario {
 	private String nome, cpf, rg, telefone, dataNasc;
-	/**
-	 * @return the dataNasc
-	 */
-	public String getDataNasc() {
-		return dataNasc;
-	}
-
-	/**
-	 * @param dataNasc the dataNasc to set
-	 */
-	public void setDataNasc(String dataNasc) {
-		this.dataNasc = dataNasc;
-	}
-
 	private Endereco endereco;
 
 	public Usuario () {}
@@ -47,18 +36,25 @@ public class Usuario {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("\n+------------------------------------------------------+\n");
-		sb.append("Nome: " + nome + "\n");
-		sb.append("CPF: " + cpf + "\n");
-		sb.append("RG: " + rg + "\n");
-		sb.append("Data de nascimento: " + dataNasc + "\n");
-		sb.append("Rua: " + endereco.rua + "\n");
-		sb.append("Bairro: " + endereco.bairro + "\n");
-		sb.append("Número: " + endereco.numero + "\n");
-		sb.append("Cidade: " + endereco.cidade + "\n");
-		sb.append("UF: " + endereco.uf + "\n");
-		sb.append("Telefone: " + telefone);
+		sb.append("Nome: " + this.nome + "\n");
+		sb.append("CPF: " + this.cpf + "\n");
+		sb.append("RG: " + this.rg + "\n");
+		sb.append("Data de nascimento: " + this.dataNasc + "\n");
+		sb.append("Rua: " + this.endereco.getRua() + "\n");
+		sb.append("Bairro: " + this.endereco.getBairro() + "\n");
+		sb.append("Número: " + this.endereco.getNumero() + "\n");
+		sb.append("Cidade: " + this.endereco.getCidade() + "\n");
+		sb.append("UF: " + this.endereco.getUf() + "\n");
+		sb.append("Telefone: " + this.telefone);
 		sb.append("\n+------------------------------------------------------+\n");
 		return sb.toString();
+		/*return "\n+------------------------------------------------------+\n" +
+				"Nome: " + this.nome + "\n" + "CPF: " + this.cpf + "\n" +
+				"RG: " + this.rg + "\n" + "Data de nascimento: " + this.dataNasc + "\n" +
+				"Rua: " + this.endereco.getRua() + "\n" + "Bairro: " + this.endereco.getBairro() + "\n" +
+				"Número: " + this.endereco.getNumero() + "\n" + "Cidade: " + this.endereco.getCidade() + "\n" +
+				"UF: " + this.endereco.getUf() + "\n" + "Telefone: " + this.telefone;*/
+				
 	}
 
 	/**
@@ -129,5 +125,19 @@ public class Usuario {
 	 */
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+	
+	/**
+	 * @return the dataNasc
+	 */
+	public String getDataNasc() {
+		return dataNasc;
+	}
+
+	/**
+	 * @param dataNasc the dataNasc to set
+	 */
+	public void setDataNasc(String dataNasc) {
+		this.dataNasc = dataNasc;
 	}
 }

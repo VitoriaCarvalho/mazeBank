@@ -7,10 +7,19 @@ import gerencia.MenuGerente;
 import usuarios.Gerente;
 import usuarios.Usuario;
 
+/**
+ * Classe principal do projeto, contendo o método main.
+ * @author vitoria and Jederson
+ *
+ */
 public class Banco {
 	public static ArrayList<Conta> contas;
 	public static ArrayList<Usuario> usuarios;
 	
+	/**
+	 * Método principal, nele são executadas todas as operações que compõem o sistema.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		String opcao = null;
 		contas = new ArrayList<>();
@@ -41,13 +50,15 @@ public class Banco {
 				}
 				break;
 			case "2":
-				System.out.println("Número da conta que deseja buscar: ");
+				System.out.println("Número da conta: ");
 				String num = EntradasErroneas.validaNumeros();
 				System.out.println("Número da agência: ");
 				String ag = EntradasErroneas.validaNumeros();
+				int flag = 0;
 				
 				for (Conta conta : Banco.contas) {
 					if (conta.getNumConta().equals(num) && conta.getNumAgencia().equals(ag)) {
+						flag = 1;
 						if (conta instanceof ContaCorrente) {
 							ContaCorrente cc = (ContaCorrente) conta;
 							cc.menu();
@@ -58,14 +69,17 @@ public class Banco {
 							ContaSalario cs = (ContaSalario) conta;
 							cs.menu();
 						}
+						break;
 					}
 				}
+				
+				if (flag == 0) System.out.println("Conta inexistente!");
 				break;
 			case "0":
 				System.out.println("Programa encerrado. Obrigado por utilizar o MazeBank :)");
 				break;
 			default:
-				System.err.println("Opção inválida! Tente novamente.");
+				System.err.println("\nOpção inválida! Tente novamente.\n");
 				break;
 			}
 			

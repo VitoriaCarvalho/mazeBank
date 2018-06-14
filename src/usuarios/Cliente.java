@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * Classe que representa um cliente de um banco
- * @author vitoria
+ * @author vitoria and Jederson
  *
  */
 public class Cliente extends Usuario {

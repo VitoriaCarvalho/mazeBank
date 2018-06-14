@@ -6,6 +6,11 @@ import banco.Banco;
 import banco.Cambio;
 import exceptions.*;
 
+/**
+ * Classe que contém as possíveis ações de uma conta corrente no sistema.
+ * @author vitoria and Jederson
+ *
+ */
 public class ContaPoupanca extends Conta implements Transferencia_Saque {
 	
 	@Override

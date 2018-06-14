@@ -9,6 +9,11 @@ import exceptions.NegativeValueException;
 import exceptions.TaPobreException;
 import exceptions.TransferenciaRecursivaException;
 
+/**
+ * Classe que contém as possíveis ações de uma conta corrente no sistema.
+ * @author vitoria and Jederson and Açucena and João Victor
+ *
+ */
 public class ContaCorrente extends Conta implements Transferencia_Saque {
 	
 	@Override

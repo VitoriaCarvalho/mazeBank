@@ -1,5 +1,10 @@
 package usuarios;
 
+/**
+ * Classe que contém os atributos que descrevem o endereço de um usuário.
+ * @author Vitoria and Jederson and Açucena and João Viictor
+ *
+ */
 public class Endereco {
 	protected String rua;
 	protected String bairro;

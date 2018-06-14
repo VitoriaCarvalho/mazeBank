@@ -5,11 +5,21 @@ import java.math.BigDecimal;
 import banco.Banco;
 import banco.Login;
 import exceptions.EntradasErroneas;
+import usuarios.Cliente;
 import usuarios.Endereco;
 import usuarios.Gerente;
 import usuarios.Usuario;
 
+/**
+ * Classe responsável por realizar as funções de gerenciamento de gerentes no sistema.
+ * @author vitoria
+ *
+ */
 public class GerenciaGerentes {
+	
+	/**
+	 * Método que faz a interação entre o gerente logado no sistema e as funções de gerenciamento de gerentes.
+	 */
 	public static void gerenciaGerentes() {
 		String opcao;
 		do {
@@ -41,6 +51,8 @@ public class GerenciaGerentes {
 			case "5":
 				listarGerentes();
 				break;
+			case "0":
+				break;
 			default:
 				System.err.println("Opção incorreta. Tente novamente!");
 				break;
@@ -48,13 +60,20 @@ public class GerenciaGerentes {
 		} while (!opcao.equals("0"));
 	}
 	
+	/**
+	 * Método responsável por realizar o cadastro de um gerente no sistema.
+	 */
 	public static void cadastrarGerente() {
 		String login, senha;
 		
 		do {
 			System.out.println("Login: ");
 			login = EntradasErroneas.scanner.nextLine().toString();
-			if (!Login.verificaLogin(login)) break;
+			if (!Login.verificaLogin(login)) {
+				break;
+			} else {
+				System.err.println("\n\nO login informado já existe!\n\n");
+			}
 		} while (true);
 		
 		System.out.println("Senha: ");
@@ -64,6 +83,11 @@ public class GerenciaGerentes {
 		BigDecimal salario = new BigDecimal(EntradasErroneas.inputBigDecimal());
 		
 		Usuario usuario = MenuGerente.cadastroUsuario();
+		
+		if (!EntradasErroneas.verificaMaiorIdade(usuario.getDataNasc())) {
+			System.err.println("\n\nUsuário menor de idade!\nPara possuir cadastro o gerente precisa ter 18 anos ou mais.\n\n");
+			return;
+		}
 		
 		Gerente gerente =  new Gerente(usuario.getNome(), usuario.getCpf(), usuario.getRg(), usuario.getTelefone(), usuario.getDataNasc(), usuario.getEndereco(), salario, login, senha);
 		
@@ -89,7 +113,8 @@ public class GerenciaGerentes {
 				}
 			}
 		} else if(login.equals("master")) {
-			System.err.println("Você não pode remover o administrador !!!");
+			System.err.println("\nVocê não pode remover o administrador !!!\n\n");
+			return;
 		}
 		System.out.println("O login informado não pertence a nenhum gerente cadastrado no mazeBank!");
 	}
@@ -114,7 +139,7 @@ public class GerenciaGerentes {
 					System.out.println("---------------------------------------------");
 					String op;
 					
-					System.out.println("Deseja alterar seu endereço? Digite 1 para sim ou 2 para não: ");
+					System.out.println("Deseja alterar seu endereço? Digite 1 para sim ou qualquer outro número para não: ");
 					op = EntradasErroneas.validaNumeros();
 					if (op.equals("1")) {
 						
@@ -133,22 +158,21 @@ public class GerenciaGerentes {
 						gerente.setEndereco(end);
 					}
 					
-					System.out.println("Deseja alterar seu salário? Digite 1 para sim ou 2 para não: ");
+					System.out.println("Deseja alterar seu salário? Digite 1 para sim ou qualquer outro número para não: ");
 					op = EntradasErroneas.validaNumeros();
 					if (op.equals("1")) {
 						System.out.println("Novo salário: ");
-						String salario = EntradasErroneas.scanner.nextLine().toString();
 						gerente.setSalario(new BigDecimal(EntradasErroneas.inputBigDecimal()));
 					}
 					
-					System.out.println("Deseja alterar seu telefone? Digite 1 para sim ou 2 para não: ");
+					System.out.println("Deseja alterar seu telefone? Digite 1 para sim ou qualquer outro número para não: ");
 					op = EntradasErroneas.validaNumeros();
 					if (op.equals("1")) {
 						System.out.println("Novo telefone: ");
 						gerente.setTelefone(EntradasErroneas.validaNumeros());
 					}
 					
-					System.out.println("Deseja alterar seu login? Digite 1 para sim ou 2 para não: ");
+					System.out.println("Deseja alterar seu login? Digite 1 para sim ou qualquer outro número para não: ");
 					op = EntradasErroneas.validaNumeros();
 					if (op.equals("1")) {
 						String l;
@@ -162,7 +186,7 @@ public class GerenciaGerentes {
 						gerente.setLogin(l);
 					}
 					
-					System.out.println("Deseja alterar sua senha? Digite 1 para sim ou 2 para não: ");
+					System.out.println("Deseja alterar sua senha? Digite 1 para sim ou qualquer outro número para não: ");
 					op = EntradasErroneas.validaNumeros();
 					if (op.equals("1")) {
 						System.out.println("Senha: ");
@@ -186,7 +210,7 @@ public class GerenciaGerentes {
 			if (usuario instanceof Gerente) {
 				Gerente gerente = (Gerente) usuario;
 				if (gerente.getLogin().equals(login)) {
-					gerente.toString();
+					System.out.println(gerente.toString());
 					return;
 				}
 			}
@@ -198,17 +222,18 @@ public class GerenciaGerentes {
 	 * Método para listar todos os gerentes cadastrados no mazeBank.
 	 */
 	public static void listarGerentes() {
-		System.out.println("\n+----------------------------------------------+");
-		System.out.println("|             GERENTES CADASTRADOS             |");
-		System.out.println("+----------------------------------------------+");
+		System.out.println("\n+------------------------------------------------------+");
+		System.out.println("|                  GERENTES CADASTRADOS                |");
+		System.out.println("+------------------------------------------------------+");
 		for (Usuario usuario: Banco.usuarios) {
 			if (usuario instanceof Gerente) {
 				Gerente gerente = (Gerente) usuario;
+				System.out.println(gerente.toString());
 				System.out.println("Login: " + gerente.getLogin());
 				System.out.println(gerente.toString());
 				System.out.println("Salário: R$ " + gerente.getSalario());
 			}
 		}
-		System.out.println("+----------------------------------------------+\n");
+		System.out.println("+------------------------------------------------------+");
 	}
 }

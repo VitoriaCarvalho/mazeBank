@@ -2,6 +2,11 @@ package usuarios;
 
 import java.math.BigDecimal;
 
+/**
+ * Classe que representa um gerente de um banco
+ * @author vitoria and Jederson
+ *
+ */
 public class Gerente extends Usuario {
 	private BigDecimal salario;
 	private String login;

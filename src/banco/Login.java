@@ -39,7 +39,7 @@ public class Login {
 	 * Método responsável por verificar se um login já existe
 	 * @param login
 	 * @param senha
-	 * @return
+	 * @return true, caso o login já exista e false, caso não exista.
 	 */
 	public static boolean verificaLogin (String login) {
 		for (Usuario usuario : Banco.usuarios) {
