@@ -111,6 +111,8 @@ public class ContaCorrente extends Conta implements Transferencia_Saque {
 				case "4":
 					System.out.println("Consulta de saldo:");
 					System.out.println(this.toString());
+					System.out.println("Dívida: R$ " + this.getDivida());
+					System.out.println("+--------------------------------+");
 					break;
 				case "5":
 					this.emprestimoConsignado();
