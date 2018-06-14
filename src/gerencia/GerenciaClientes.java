@@ -13,7 +13,7 @@ import usuarios.Usuario;
 
 /**
  * Classe responsável por realizar as funções de gerenciamento de clientes no sistema.
- * @author vitoria and Jederson
+ * @author vitoria, Jederson, Acucena e Joao Victor
  *
  */
 public class GerenciaClientes {
@@ -70,7 +70,7 @@ public class GerenciaClientes {
 	 */
 	public static void cadastrarCliente() {
 		
-		Usuario usuario = MenuGerente.cadastroUsuario();
+		Usuario usuario = MenuGerente.cadastroUsuario("cliente");
 		if (!EntradasErroneas.verificaMaiorIdade(usuario.getDataNasc())) {
 			System.err.println("\n\nUsuário menor de idade!\nPara possuir cadastro o cliente precisa ter 18 anos ou mais.\n\n");
 			return;
@@ -214,6 +214,11 @@ public class GerenciaClientes {
 						System.out.println("Informe o valor a ser depositado: ");
 						try {
 							cs.deposita(new BigDecimal(EntradasErroneas.inputBigDecimal()));
+							if (cs.getDivida().compareTo(new BigDecimal("0")) > 0) {
+								BigDecimal desconto = cs.getSaldo().multiply(new BigDecimal("0.3"));
+								cs.setSaldo(cs.getSaldo().subtract(desconto));
+								cs.setDivida(cs.getDivida().subtract(desconto));
+							}
 							break;
 						} catch (NegativeValueException e) {
 							System.err.println(e.getMessage());

@@ -8,7 +8,7 @@ import exceptions.*;
 
 /**
  * Classe que contém as possíveis ações de uma conta corrente no sistema.
- * @author vitoria and Jederson
+ * @author vitoria, Jederson, Acucena e Joao Victor
  *
  */
 public class ContaPoupanca extends Conta implements Transferencia_Saque {
@@ -56,7 +56,7 @@ public class ContaPoupanca extends Conta implements Transferencia_Saque {
 	
 	@Override
 	public void menu() {
-		String opcao;
+		String opcao = null;
 		BigDecimal valor;
 		
 		do {			
@@ -123,8 +123,6 @@ public class ContaPoupanca extends Conta implements Transferencia_Saque {
 			} catch (Exception e) {
 				System.err.println(e.getMessage());
 			}
-		} while (true);
+		} while (!opcao.equals("0"));
 	}
-	
-	
 }

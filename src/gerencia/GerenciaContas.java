@@ -9,7 +9,7 @@ import exceptions.EntradasErroneas;
 
 /**
  * Classe responsável por realizar as funções de gerenciamento das contas no sistema.
- * @author vitoria and Jederson
+ * @author vitoria, Jederson, Acucena e Joao Victor
  *
  */
 public class GerenciaContas {
@@ -46,18 +46,17 @@ public class GerenciaContas {
 					
 					if (opcao.equals("1")) {
 						ContaCorrente cc = new ContaCorrente();
-						cc.cadastrarConta();
+						cc.cadastrarConta("corrente");
 						Banco.contas.add(cc);
 						break;
 					} else if (opcao.equals("2")) {
 						ContaPoupanca cp = new ContaPoupanca();
-						cp.cadastrarConta();
+						cp.cadastrarConta("poupanca");
 						Banco.contas.add(cp);
 						break;
 					} else if (opcao.equals("3")) {
 						ContaSalario cs = new ContaSalario();
-						cs.cadastrarConta();
-						Banco.contas.add(cs);
+						cs.cadastrarConta("salario");
 						break;
 					} else if (opcao.equals("0")) {
 						break;
@@ -74,6 +73,8 @@ public class GerenciaContas {
 				break;
 			case "4":
 				listarContas();
+				break;
+			case "0":
 				break;
 			default:
 				System.err.println("Opção incorreta. Tente novamente!");
@@ -118,17 +119,17 @@ public class GerenciaContas {
 					System.out.println("+--------------------------------+");
 					System.out.println("|         Conta Corrente         |");
 					System.out.println("+--------------------------------+");
-					conta.toString();
+					System.out.println(conta.toString());
 				} else if (conta instanceof ContaPoupanca) {
 					System.out.println("+--------------------------------+");
 					System.out.println("|         Conta Poupanca         |");
 					System.out.println("+--------------------------------+");
-					conta.toString();
+					System.out.println(conta.toString());
 				} else if (conta instanceof ContaSalario) {
 					System.out.println("+--------------------------------+");
 					System.out.println("|         Conta Salario          |");
 					System.out.println("+--------------------------------+");
-					conta.toString();
+					System.out.println(conta.toString());
 				}
 			}
 		}
@@ -143,17 +144,17 @@ public class GerenciaContas {
 				System.out.println("+--------------------------------+");
 				System.out.println("|         Conta Corrente         |");
 				System.out.println("+--------------------------------+");
-				conta.toString();
+				System.out.println(conta.toString());
 			} else if (conta instanceof ContaPoupanca) {
 				System.out.println("+--------------------------------+");
 				System.out.println("|         Conta Poupanca         |");
 				System.out.println("+--------------------------------+");
-				conta.toString();
+				System.out.println(conta.toString());
 			} else if (conta instanceof ContaSalario) {
 				System.out.println("+--------------------------------+");
 				System.out.println("|         Conta Salario          |");
 				System.out.println("+--------------------------------+");
-				conta.toString();
+				System.out.println(conta.toString());
 			}
 		}
 	}

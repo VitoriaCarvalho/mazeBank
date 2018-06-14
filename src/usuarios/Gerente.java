@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 /**
  * Classe que representa um gerente de um banco
- * @author vitoria and Jederson
+ * @author vitoria, Jederson, Acucena e Joao Victor
  *
  */
 public class Gerente extends Usuario {
@@ -13,6 +13,7 @@ public class Gerente extends Usuario {
 	private String senha;
 	
 	public Gerente () {}
+	
 	/**
 	 * @param nome
 	 * @param cpf
@@ -44,16 +45,12 @@ public class Gerente extends Usuario {
 		this.salario = salario;
 	}
 
-
-
 	/**
 	 * @return the login
 	 */
 	public String getLogin() {
 		return login;
 	}
-
-
 
 	/**
 	 * @param login the login to set
@@ -62,16 +59,12 @@ public class Gerente extends Usuario {
 		this.login = login;
 	}
 
-
-
 	/**
 	 * @return the senha
 	 */
 	public String getSenha() {
 		return senha;
 	}
-
-
 
 	/**
 	 * @param senha the senha to set

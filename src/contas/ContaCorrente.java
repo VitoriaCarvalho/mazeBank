@@ -47,7 +47,7 @@ public class ContaCorrente extends Conta implements Transferencia_Saque {
 
 	@Override
 	public void menu() {
-		String opcao;
+		String opcao = null;
 		BigDecimal valor;
 		
 		do {			
@@ -113,10 +113,26 @@ public class ContaCorrente extends Conta implements Transferencia_Saque {
 			} catch (Exception e) {
 				System.err.println(e.getMessage());
 			}
-		} while (true);
+		} while (!opcao.equals("0"));
 	}
 
+	/**
+	 * Método que concede um empréstimo consignado a um cliente, caso o mesmo possua uma conta salário anexada  
+	 */
 	private void emprestimoConsignado() {
 		
+		for (Conta conta : Banco.contas) {
+			if (conta instanceof ContaSalario) {
+				if (((ContaSalario) conta).getContaAnexada().equals(this)) {
+					System.out.println("Valor do empréstimo: ");
+					BigDecimal valor = new BigDecimal(EntradasErroneas.inputBigDecimal());
+					((ContaSalario) conta).setDivida(valor);
+					System.out.println("Empréstimo consignado realizado! A dívida será debitada da sua conta salário.");
+					return;
+				}
+			}
+		}
+		
+		System.out.println("Você não tem conta salário associada, o empréstimo consignado não pode ser realizado!");
 	}
 }

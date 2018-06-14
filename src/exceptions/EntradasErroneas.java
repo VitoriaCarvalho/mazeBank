@@ -3,9 +3,12 @@ package exceptions;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
+import banco.Banco;
+import contas.Conta;
+
 /**
  * Essa classe contém métodos para tratamento de entradas errôneas.
- * @author vitoria and Jederson
+ * @author vitoria, Jederson, Acucena e Joao Victor
  *
  */
 public class EntradasErroneas {
@@ -21,6 +24,7 @@ public class EntradasErroneas {
 		do {			
 			valor = scanner.nextLine();
 			try {				
+				NegativeBigDecimal(valor);
 				valorFinal = new BigDecimal(valor);
 				return valor;
 			} catch (Exception e) {
@@ -30,19 +34,27 @@ public class EntradasErroneas {
 	}
 	
 	/**
+	 * Método para verificar se não está sendo passado um valor negativo para empréstimo consignado
+	 * @param valor
+	 * @throws NegativeValueException
+	 */
+	public static void NegativeBigDecimal(String valor) throws NegativeValueException {
+		if (Double.parseDouble(valor) < 0) throw new NegativeValueException("\nEmpréstimo não pode ser negativo.\n");
+	}
+	
+	/**
 	 * Método para validar entrada de RG
-	 * @return valor Long caso a conversão tenha sido efetuada com sucesso
+	 * @return valor String caso o número do RG seja válido
 	 * @param message
 	 */
 	public static String validaRG(String message) {
 		String valor;
-		Long valorFinal;
 		do {
 			System.out.println(message);
 			valor = scanner.nextLine().toString();
 			//valorFinal = valor;
 			try {				
-				valorFinal = Long.parseLong(valor);
+				Long.parseLong(valor);
 				return valor;
 			} catch (Exception e) {
 				System.err.println("\nNúmero de identificação inválido. Digite novamente!\n");
@@ -52,19 +64,18 @@ public class EntradasErroneas {
 	
 	/**
 	 * Método para validar entrada de CPF
-	 * @return valor Long caso a conversão tenha sido efetuada com sucesso
+	 * @return valor String caso o número de CPF seja válido
 	 * @param message
 	 */
 	public static String validaCPF(String message) {
 		String valor;
-		Long valorFinal;
 		do {
 			System.out.println(message);
 			valor = scanner.nextLine().toString();
 			//valorFinal = valor;
 			try {
 				if (valor.length() == 11) {
-					valorFinal = Long.parseLong(valor);
+					Long.parseLong(valor);
 					return valor;
 				} else {
 					System.err.println("\nNúmero de identificação inválido. Digite novamente!\n");
@@ -131,17 +142,33 @@ public class EntradasErroneas {
 	 */
 	public static String validaNumeros() {
 		String num;
-		Long valor;
 		
 		do {
 			try {
 				num = scanner.nextLine().toString();
-				valor = Long.parseLong(num);
+				Long.parseLong(num);
 				return num;
 			} catch (Exception e) {
 				System.err.println("\nEntrada inválida. Digite novamente!\n");
 			}
 			
 		} while (true);
+	}
+	
+	/**
+	 * Método responsável por verificar se um número de conta já existe.
+	 * @return true se existe um número de conta igual, e false se não existe.
+	 */
+	public static boolean VerificaSeNumContaExiste(String numConta) {
+		
+		if (!Banco.contas.isEmpty()) {
+			for (Conta conta : Banco.contas) {
+				if (conta.getNumConta().equals(numConta)) {
+					System.out.println("\n\nNúmero de conta já existente!\n\n");
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }

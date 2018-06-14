@@ -1,5 +1,6 @@
 package contas;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import banco.Banco;
@@ -10,15 +11,15 @@ import usuarios.Usuario;
 
 /**
  * Essa superclasse contém os atributos e métodos em comum nos três tipos de contas do mazeBank.
- * @author vitoria and Jederson
+ * @author vitoria, Jederson, Acucena e Joao Victor
  *
  */
-public abstract class Conta {
-	private Cliente titular;
-	private BigDecimal saldo;
-	private String numAgencia;
-	private String numConta;
-	private String senha;
+public abstract class Conta implements Serializable{
+	protected Cliente titular;
+	protected BigDecimal saldo;
+	protected String numAgencia;
+	protected String numConta;
+	protected String senha;
 	
 	public Conta () {}
 		
@@ -27,6 +28,7 @@ public abstract class Conta {
 	 * @param saldo
 	 * @param numAgencia
 	 * @param numConta
+	 * @param senha
 	 */
 	public Conta(Cliente titular, BigDecimal saldo, String numAgencia, String numConta, String senha) {
 		super();
@@ -53,7 +55,7 @@ public abstract class Conta {
 	}
 
 	/**
-	 * Método que cria a interface do entre o cliente e a sua conta
+	 * Método que cria a interface entre o cliente e a sua conta
 	 */
 	public abstract void menu ();
 	
@@ -146,16 +148,58 @@ public abstract class Conta {
 	/**
 	 * Método para abrir uma nova conta no banco, se o cliente já estiver cadastrado.
 	 */
-	public void cadastrarConta() {
+	public void cadastrarConta(String tipo) {
 		
 		String cpf = EntradasErroneas.validaCPF("CPF do cliente: ");
 		int flag = 0;
-		Cliente cliente = null;
 		
 		for (Usuario users : Banco.usuarios) {
 			if (users.getCpf().equals(cpf)) {
 				if (users instanceof Cliente) {
-					cliente = (Cliente) users;
+					Cliente cliente = (Cliente) users;
+					
+					do {
+						System.out.println("Número da conta: ");
+						this.numConta = EntradasErroneas.validaNumeros();
+						if (!EntradasErroneas.VerificaSeNumContaExiste(numConta)) break;
+					} while (true);
+					
+					do {			
+						int count = 0;
+						System.out.println("Número da agência: ");
+						this.numAgencia = EntradasErroneas.validaNumeros();
+						
+						for (Conta conta : Banco.contas) {
+							count++;
+							if (tipo.equals("corrente")) {								
+								if (conta instanceof ContaCorrente && conta.getNumAgencia().equals(numAgencia)) {
+									System.out.println("Um cliente não pode possuir duas contas iguais na mesma agência!\n" +
+														"Escolha outra agência.\n");
+									break;
+								}
+							} else if (tipo.equals("poupanca")) {
+								if (conta instanceof ContaPoupanca && conta.getNumAgencia().equals(numAgencia)) {
+									System.out.println("Um cliente não pode possuir duas contas iguais na mesma agência!\n" +
+											"Escolha outra agência.\n");
+									break;
+								}
+							} else if (tipo.equals("salario")) {
+								if (conta instanceof ContaSalario && conta.getNumAgencia().equals(numAgencia)) {
+									System.out.println("Um cliente não pode possuir duas contas iguais na mesma agência!\n" +
+											"Escolha outra agência.\n");
+									break;
+								}
+							}
+						}
+						if (count == Banco.contas.size()) break;
+					} while (true);
+					
+					System.out.println("Senha: ");
+					this.senha = EntradasErroneas.scanner.nextLine().toString();
+					
+					this.titular = cliente;
+					
+					this.saldo = new BigDecimal("0");
 					flag = 1;
 					break;
 				}
@@ -167,16 +211,7 @@ public abstract class Conta {
 					+ "Realize seu cadastro e depois crie a conta!");
 			return;
 		}
-		
-		System.out.println("Número da conta: ");
-		this.numConta = EntradasErroneas.validaNumeros();
-		
-		System.out.println("Número da agência: ");
-		this.numAgencia = EntradasErroneas.validaNumeros();
-		
-		this.titular = cliente;
-		
-		this.saldo = new BigDecimal("0");
+		System.out.println("Conta criada com sucesso!");
 	}
 	
 }

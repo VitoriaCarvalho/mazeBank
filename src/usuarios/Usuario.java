@@ -1,11 +1,13 @@
 package usuarios;
 
+import java.io.Serializable;
+
 /**
  * Classe que representa um usuário do banco, contendo os atributos que o identificam. 
- * @author vitoria and Jederson
+ * @author vitoria, Jederson, Acucena e Joao Victor
  *
  */
-public class Usuario {
+public class Usuario implements Serializable {
 	private String nome, cpf, rg, telefone, dataNasc;
 	private Endereco endereco;
 

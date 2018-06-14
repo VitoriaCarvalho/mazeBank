@@ -6,14 +6,14 @@ import usuarios.Usuario;
 
 /**
  * Classe responsável por realizar o login de um gerente no banco
- * @author vitoria and jederson
+ * @author vitoria, Jederson, Acucena e Joao Victor
  *
  */
 public class Login {
 	
 	/**
 	 * Método que possibilita o acesso de um gerente
-	 * @return
+	 * @return true caso acesso seja autorizado e false caso contrário
 	 */
 	public static boolean loginGerente () {
 		System.out.println("+-----------------------+");
@@ -38,7 +38,6 @@ public class Login {
 	/**
 	 * Método responsável por verificar se um login já existe
 	 * @param login
-	 * @param senha
 	 * @return true, caso o login já exista e false, caso não exista.
 	 */
 	public static boolean verificaLogin (String login) {

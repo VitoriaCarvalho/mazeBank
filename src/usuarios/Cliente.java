@@ -1,10 +1,8 @@
 package usuarios;
 
-import java.util.Date;
-
 /**
  * Classe que representa um cliente de um banco
- * @author vitoria and Jederson
+ * @author vitoria, Jederson, Acucena e Joao Victor
  *
  */
 public class Cliente extends Usuario {
@@ -16,11 +14,9 @@ public class Cliente extends Usuario {
 	 * @param nome
 	 * @param cpf
 	 * @param rg
-	 * @param endereco
 	 * @param telefone
 	 * @param dataNasc
-	 * @param login
-	 * @param senha
+	 * @param endereco
 	 * @param dataEntrada
 	 */
 	public Cliente(String nome, String cpf, String rg, String telefone, String dataNasc, Endereco endereco, String dataEntrada) {

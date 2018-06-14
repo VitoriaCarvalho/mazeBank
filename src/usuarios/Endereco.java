@@ -1,16 +1,37 @@
 package usuarios;
 
+import java.io.Serializable;
+
 /**
  * Classe que contém os atributos que descrevem o endereço de um usuário.
- * @author Vitoria and Jederson and Açucena and João Viictor
+ * @author vitoria, Jederson, Acucena e Joao Victor
  *
  */
-public class Endereco {
+public class Endereco implements Serializable {
 	protected String rua;
 	protected String bairro;
 	protected String numero;
 	protected String cidade;
 	protected String uf;
+	
+	public Endereco () {}
+	
+	/**
+	 * @param rua
+	 * @param bairro
+	 * @param numero
+	 * @param cidade
+	 * @param uf
+	 */
+	public Endereco(String rua, String bairro, String numero, String cidade, String uf) {
+		super();
+		this.rua = rua;
+		this.bairro = bairro;
+		this.numero = numero;
+		this.cidade = cidade;
+		this.uf = uf;
+	}
+
 	/**
 	 * @return the rua
 	 */

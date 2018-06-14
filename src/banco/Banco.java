@@ -1,15 +1,19 @@
 package banco;
 
+import java.io.File;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import contas.*;
 import exceptions.EntradasErroneas;
 import gerencia.MenuGerente;
+import serializacao.Serializacao;
+import usuarios.Endereco;
 import usuarios.Gerente;
 import usuarios.Usuario;
 
 /**
  * Classe principal do projeto, contendo o método main.
- * @author vitoria and Jederson
+ * @author vitoria, Jederson, Acucena e Joao Victor
  *
  */
 public class Banco {
@@ -22,14 +26,21 @@ public class Banco {
 	 */
 	public static void main(String[] args) {
 		String opcao = null;
-		contas = new ArrayList<>();
-		usuarios = new ArrayList<>();
 		
-		/**
-		 * Este objeto representa o administrador do sistema
-		 */
-		Gerente admin = new Gerente("Master", null, null, null, null, null, null, "master", "123");
-		usuarios.add(admin);
+		if (new File("contas.mz").exists() && new File("usuarios.mz").exists()) {
+			Serializacao.deserializar();
+		} else {			
+			contas = new ArrayList<>();
+			usuarios = new ArrayList<>();
+			
+			/**
+			 * Este objeto representa o administrador do sistema
+			 */
+			Endereco end = new Endereco(" ", " ", " ", " ", " ");
+			Gerente admin = new Gerente("Master", " ", " ", " ", " ", end, new BigDecimal("1200"), "master", "123");
+			usuarios.add(admin);
+		}
+		
 		
 		do {
 			System.out.println("+-------------------------+");
@@ -76,6 +87,7 @@ public class Banco {
 				if (flag == 0) System.out.println("Conta inexistente!");
 				break;
 			case "0":
+				Serializacao.serializar();
 				System.out.println("Programa encerrado. Obrigado por utilizar o MazeBank :)");
 				break;
 			default:

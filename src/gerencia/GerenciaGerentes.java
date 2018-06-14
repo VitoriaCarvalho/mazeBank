@@ -12,7 +12,7 @@ import usuarios.Usuario;
 
 /**
  * Classe responsável por realizar as funções de gerenciamento de gerentes no sistema.
- * @author vitoria
+ * @author vitoria, Jederson, Acucena e Joao Victor
  *
  */
 public class GerenciaGerentes {
@@ -82,7 +82,7 @@ public class GerenciaGerentes {
 		System.out.println("Salário: ");
 		BigDecimal salario = new BigDecimal(EntradasErroneas.inputBigDecimal());
 		
-		Usuario usuario = MenuGerente.cadastroUsuario();
+		Usuario usuario = MenuGerente.cadastroUsuario("gerente");
 		
 		if (!EntradasErroneas.verificaMaiorIdade(usuario.getDataNasc())) {
 			System.err.println("\n\nUsuário menor de idade!\nPara possuir cadastro o gerente precisa ter 18 anos ou mais.\n\n");
@@ -228,10 +228,12 @@ public class GerenciaGerentes {
 		for (Usuario usuario: Banco.usuarios) {
 			if (usuario instanceof Gerente) {
 				Gerente gerente = (Gerente) usuario;
-				System.out.println(gerente.toString());
-				System.out.println("Login: " + gerente.getLogin());
-				System.out.println(gerente.toString());
-				System.out.println("Salário: R$ " + gerente.getSalario());
+				if (!gerente.getLogin().equals("master")) {					
+					System.out.println(gerente.toString());
+					System.out.println("Login: " + gerente.getLogin());
+					System.out.println(gerente.toString());
+					System.out.println("Salário: R$ " + gerente.getSalario());
+				} 
 			}
 		}
 		System.out.println("+------------------------------------------------------+");
